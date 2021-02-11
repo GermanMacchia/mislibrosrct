@@ -1,13 +1,75 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+     background-image: linear-gradient(to right bottom, #32253d, #422d4f, #543461, #683b72, #7d4283, #744c90, #69569b, #5c5fa5, #2e669b, #1c6787, #306570, #45605f);
+}
+
+#clear{
+    clear: both;
+}
+
+#Nav h1 {
+	font-family: lobster;
+    float: left;
+    margin-top: 40px;
+    color: #9EF1EE;
+    margin-left: 10px;
+}
+/*
+#Nav ul a {
+    text-decoration: none;
+    text-align: center;
+    margin-left: 100px;
+    color: #9736F7;
+    line-height: 50px;
+    font-size: 25px;
+}
+
+#Nav ul a:hover {
+	color: #10E8C7;
+}
+*/
+#Nav img {
+	width: 350px;
+	height: auto;
+	margin: 5px 5px -3px 0px;
+    border: solid black 5px;
+    float: right;
+
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+        monospace;
 }
+
+#log{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: inline;
+    text-align: center;
+}
+
+.Logform {
+    width: 50%;
+    height: auto;
+    border: solid grey 3px;
+    height: 300px;
+}
+
+#log label {
+    color: #D6E4E5;
+    font-size: 25px
+}
+
+#log h2{
+    color:#56CC0F;
+}
+
+
+
