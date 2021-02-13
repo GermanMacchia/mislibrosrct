@@ -61,6 +61,6 @@ function LoginForm (props) {
 }
 
 const mapActionsToProps = (dispatch) => {
-	return {onSave: (auth) => dispatch({type: 'AUTH', data: auth})}
+	return {onSave: (token) => dispatch({type: 'TOKEN', data: token})}
 }
 export default connect(null, mapActionsToProps)(LoginForm);

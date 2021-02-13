@@ -6,7 +6,8 @@ import LoginForm from './LoginForm'
 function Login (props) {
 
 
-	const token = props.auth[0]
+	const token = props.token[0];
+
 
 	const [auth, setAuth] = useState({
 		auth: false,
@@ -32,7 +33,7 @@ function Login (props) {
 }
 
 const mapStateToProps = (state) =>{
-	return {auth: state}
+	return {token: state}
 }
 
 export default connect(mapStateToProps, null)(Login);

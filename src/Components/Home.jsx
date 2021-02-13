@@ -1,24 +1,14 @@
-import React, {Component, useState, useEffect} from 'react'
-import axios from 'axios';
-import Aside from './Aside';
-import { connect } from 'react-redux';
+import React from 'react'
+import Biblioteca from './Biblioteca'
 
-
-function Home (props) {
-
-	console.log(props.auth)
+export default function Home () {
 
 
 		return(
-			<>
-				<Aside />
 
-			</>
+			<Biblioteca />
+
+
 		);
 }
 
-const mapStateToProps = (state) =>{
-	return {auth: state}
-}
-
-export default connect(mapStateToProps, null)(Home);

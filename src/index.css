@@ -9,39 +9,49 @@ body {
      background-image: linear-gradient(to right bottom, #32253d, #422d4f, #543461, #683b72, #7d4283, #744c90, #69569b, #5c5fa5, #2e669b, #1c6787, #306570, #45605f);
 }
 
-#clear{
+.clear{
     clear: both;
 }
 
-#Nav h1 {
+#header img {
+    width: 350px;
+    height: auto;
+    margin: 5px 5px -3px 0px;
+    border: solid black 5px;
+    float: right;
+
+}
+#header h1 {
 	font-family: lobster;
     float: left;
     margin-top: 40px;
     color: #9EF1EE;
     margin-left: 10px;
 }
-/*
-#Nav ul a {
+
+ul{
+    list-style-type: none;
+}
+nav {
+    margin-top: 10px;
+    border-top: solid #EBA9F1 5px;
+    display: block;
+}
+
+nav ul a {
+    float: left;
     text-decoration: none;
-    text-align: center;
-    margin-left: 100px;
-    color: #9736F7;
-    line-height: 50px;
-    font-size: 25px;
-}
-
-#Nav ul a:hover {
-	color: #10E8C7;
-}
-*/
-#Nav img {
-	width: 350px;
-	height: auto;
-	margin: 5px 5px -3px 0px;
-    border: solid black 5px;
-    float: right;
+    margin: -20px 50px 0px -30px;
+    color: #26D632;
+    font-size: 20px;
 
 }
+
+nav ul a:hover {
+	color: #F22572;
+}
+
+
 
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
@@ -57,8 +67,7 @@ code {
 
 .Logform {
     width: 50%;
-    height: auto;
-    border: solid grey 3px;
+    border: solid #EBA9F1 3px;
     height: 300px;
 }
 
@@ -71,5 +80,44 @@ code {
     color:#56CC0F;
 }
 
+.homeform {
+margin-top: 10px;
+text-align: center;
+}
 
+.floatLeft{
+    float: left;
+    margin-left: 50px;
+}
+.homeform textarea{
+    width: 160px;
+    height: 130px;
 
+}
+
+.homeform label {
+    color: #D6E4E5;
+    font-size: 25px
+}
+
+.homeform h2{
+    color: #EC7015;
+}
+
+.contentForm{
+    width: 33%;
+    height: 400px;
+    border: solid #EBA9F1 5px; 
+    clear: both;
+}
+.contentList{
+    width: 67%;
+    height: 400px;
+    border: solid #EBA9F1 5px; 
+    clear: both;
+}
+
+.display{
+    display: inline-flex;
+    width: 100%;
+}

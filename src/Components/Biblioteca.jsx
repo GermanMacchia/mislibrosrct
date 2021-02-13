@@ -1,41 +1,48 @@
-import React, {Component, useState} from 'react';
-import { connect } from 'react-redux';
+import React, {useEffect, useState} from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
+
+import Nav from './Nav';
+import LibrosForm from './LibrosForm'
 
 
+function Biblioteca (props) {
 
-class Biblioteca extends Component  {
+	const [libros, setLibros] = useState({});
 
-	state = {
-		data: []
-	}
+	const token = props.token[0];
 
+	console.log(token)
 
+	useEffect(async () => {
+		const libros = await axios.get(`//localhost:8000/libro`,{
+  			headers: {
+    		authorization: token
+  			}
+		});
+		console.log(libros)
 
-	render(){
+		return () => {
+		};
+	}, [setLibros])
 
-		return (
-				<>
-					<table>
-
-
-						<caption>Mis Libros</caption>
-						<thead>
-							<tr>
-								<th>Id</th>
-								<th>Nombre</th>
-								<th>Descripción</th>
-								<th>Prestado a</th>
-							</tr>
-						</thead>
-						<tbody>
-						</tbody>
-					</table>
-				</>
-			);
-		}
+	return(
+		<>
+			<Nav />
+			<div className='display'>
+				<div className='contentForm'>
+					<LibrosForm />
+				</div>
+				<div className='contentList'>
+					<h1> Libros list </h1>
+				</div>
+			</div>
+		</>
+		)
 }
-		
 
+const mapStateToProps = (state) =>{
+	return {token: state}
+}
 
-export default Biblioteca;
+export default connect(mapStateToProps, null)(Biblioteca);
