@@ -1,19 +1,24 @@
 import React, {Component, useState, useEffect} from 'react'
 import axios from 'axios';
 import Aside from './Aside';
+import { connect } from 'react-redux';
 
 
-export default class Home extends Component {
+function Home (props) {
 
+	console.log(props.auth)
 
-
-
-	render() {
 
 		return(
 			<>
 				<Aside />
+
 			</>
 		);
-	}
 }
+
+const mapStateToProps = (state) =>{
+	return {auth: state}
+}
+
+export default connect(mapStateToProps, null)(Home);

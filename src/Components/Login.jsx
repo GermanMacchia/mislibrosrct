@@ -1,60 +1,38 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import LoginForm from './LoginForm'
 
-export default function Login () {
+function Login (props) {
 
-	const [pass, setPass] = useState('');
-	const [user, setUser] = useState('');
 
-	const handlePassChange = (e) => {
-		setPass(e.target.value);
-	}
+	const token = props.auth[0]
 
-	const handleUserChange = (e) => {
-		setUser(e.target.value);
+	const [auth, setAuth] = useState({
+		auth: false,
+		token: token})
 
-	}
-	
-	const API = "https://localhost:8000/login";
 
-	async function makeRequest () {
-
-	    const params = {
-		        user: user,
-		        pass: pass
-		      }
-
-    	
-    	const respuesta = await axios.post(API, params).then(res => {
-        console.log(respuesta.respuesta)
-		})
-		.catch(err => {
-		    if (err.response) {
-		      alert('Problema')
-		    } else if (err.request) {
-		      alert('Problema');
-		  }
-		})
-
-    }
-
-    const handleSubmit = (e) => {
-    	e.preventDefault();
-    	makeRequest();
-    }
+	useEffect( () => {
+		if(token != undefined ){
+			setAuth({
+				auth: true
+			})		
+		}
+		return () => {
+			window.location = '/home'
+		};
+	}, [token])
 
 
 	return(
-			<div className= "Logform">
-				<h2>Ingresa a tu biblioteca</h2>
-				<form action="Login">
-					<label>User </label>
-					<input type="text" onChange={handleUserChange} /><br/>
-					<label>Pass </label>
-					<input type="text" onChange={handlePassChange}/><br/><br/>
-					<input type= "submit" onClick={handleSubmit} value= "Ingresa" />
-				</form>
-			</div>
+			<LoginForm />
 		);
 
 }
+
+const mapStateToProps = (state) =>{
+	return {auth: state}
+}
+
+export default connect(mapStateToProps, null)(Login);
