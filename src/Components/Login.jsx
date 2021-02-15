@@ -3,37 +3,33 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import LoginForm from './LoginForm'
 
+
 function Login (props) {
 
 
-	const token = props.token[0];
-
-
-	const [auth, setAuth] = useState({
-		auth: false,
-		token: token})
-
-
-	useEffect( () => {
-		if(token != undefined ){
-			setAuth({
-				auth: true
-			})		
+	const handleRequest = (auth, token) => {
+		const keep = token;
+		
+		while(keep === undefined){
+			console.log('awaiting auhorization')
+			props.onSave({ token: token });
 		}
-		return () => {
-			window.location = '/home'
-		};
-	}, [token])
+		
+		window.location = '/home';
+		
+  	}
 
 
 	return(
-			<LoginForm />
+		<>
+			<LoginForm handleRequest={handleRequest} />
+		</>
 		);
 
 }
 
-const mapStateToProps = (state) =>{
-	return {token: state}
+const mapActionsToProps = (dispatch) => {
+	return {onSave: (token) => dispatch({type:'AUTH', data: token})}
 }
 
-export default connect(mapStateToProps, null)(Login);
+export default connect(null, mapActionsToProps)(Login);

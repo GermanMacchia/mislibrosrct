@@ -83,6 +83,7 @@ code {
 .homeform {
 margin-top: 10px;
 text-align: center;
+
 }
 
 .floatLeft{
@@ -109,6 +110,8 @@ text-align: center;
     height: 400px;
     border: solid #EBA9F1 5px; 
     clear: both;
+    min-width: 250px;
+    float:left;
 }
 .contentList{
     width: 67%;
@@ -120,4 +123,36 @@ text-align: center;
 .display{
     display: inline-flex;
     width: 100%;
+}
+
+
+@media (max-width:1178px){
+
+    .floatLeft{
+        float: none;
+        margin-left: 50px;
+    }
+
+    .homeform{
+        text-align: left;
+    }
+
+    .bigtext{
+        margin-left: 50px;
+    }
+
+    .homeform h2{
+    color: #EC7015;
+    text-align: center;
+    }
+
+    .contentForm{
+    width: 33%;
+    height: 470px;
+    border: solid #EBA9F1 5px; 
+    clear: both;
+    min-width: 250px;
+    float:left;
+}
+
 }

@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Header from './Components/Header';
 import SignIn from './Components/SignIn';
 import Home from './Components/Home';
+import Biblioteca from './Components/Biblioteca';
 
 class Router extends Component {
 
@@ -19,7 +20,7 @@ class Router extends Component {
 					<Switch>
 						<Route exact path="/" component={SignIn} />
 						<Route exact path="/home" component={Home} />
-									
+						<Route exact path="/biblioteca" component={Home} />
 						<Route component={Error} />
 					</Switch>
 			

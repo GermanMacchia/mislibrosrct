@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import { connect } from 'react-redux';
 
-function LoginForm (props) {
+
+export default function LoginForm ({handleRequest}) {
 
 	const [form, setForm] = useState({
 								user:'',
@@ -16,21 +16,17 @@ function LoginForm (props) {
 		});
 	}
 
-
     const handleSubmit = (e) => {
     	e.preventDefault();
 
     	async function conexion () { 
 
-			return await axios.post(`//localhost:8000/login`, 
-				{
-				    user: form.user,
-				    pass: form.pass
-				})
+			return await axios.post(`//localhost:8000/login`, form)
 					.then( (res) => {
 						if(res.data.token != null || undefined){
-							console.log('conexion exitosa')
-							props.onSave({token:res.data.token});
+							console.log('conexion exitosa');
+							const token = res.data.token;
+							handleRequest(true, {token: token});
 						}else{
 							console.log('Error de Login')
 						}
@@ -40,27 +36,24 @@ function LoginForm (props) {
 					    alert('Error de Datos');
 					});
 				}
-		conexion();
 
-		
+		conexion();
     }
 
-
 	return(
-			<div className= "Logform">
-				<h2>Ingresa a tu biblioteca</h2>
-				<form action="Login">
-					<label>User </label>
-					<input type="text" name='user' placeholder="Usuario" onChange={handleForm} /><br/>
-					<label>Pass </label>
-					<input type="password" name='pass'placeholder="Contraseña" onChange={handleForm}/><br/><br/>
-					<input type= "submit" onClick={handleSubmit} value= "Ingresa" />
-				</form>
-			</div>
+		<div className= "Logform">
+			<h2>Ingresa a tu biblioteca</h2>
+			<form action="Login">
+				<label>User </label>
+				<input type="text" name='user' placeholder="Usuario" onChange={handleForm} /><br/>
+				<label>Pass </label>
+				<input type="password" name='pass'placeholder="Contraseña" onChange={handleForm}/><br/><br/>
+				<input type= "submit" onClick={handleSubmit} value= "Ingresa" />
+			</form>
+		</div>
 	);
+
 }
 
-const mapActionsToProps = (dispatch) => {
-	return {onSave: (token) => dispatch({type: 'TOKEN', data: token})}
-}
-export default connect(null, mapActionsToProps)(LoginForm);
+
+

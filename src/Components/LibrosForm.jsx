@@ -16,9 +16,9 @@ export default function LibrosForm () {
 						<input type="text" placeholder="Prestado a..."/><br/>
 					</form>
 				</div>
-				<div>
+				<div className="bigtext">
 					<form>
-						<label>Descripcion </label><br/>
+						<label className = 'descripcion'>Descripcion </label><br/>
 						<textarea type="textarea" placeholder="Descripcion" /><br/><br/>
 						<input type= "submit" value= "Guardar" />
 					</form>

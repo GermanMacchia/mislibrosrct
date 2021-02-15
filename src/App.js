@@ -1,10 +1,10 @@
-
 import Router from './Router';
 import axios from 'axios';
 
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, combineReducers  } from 'redux';
 import MisLibrosReducer from './MisLibrosReducer';
+
 
 var store = createStore(MisLibrosReducer);
 
