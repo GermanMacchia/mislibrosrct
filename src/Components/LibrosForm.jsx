@@ -20,7 +20,15 @@ export default function LibrosForm () {
 					<form>
 						<label className = 'descripcion'>Descripcion </label><br/>
 						<textarea type="textarea" placeholder="Descripcion" /><br/><br/>
-						<input type= "submit" value= "Guardar" />
+						<input type= "submit" id='guardar_button' value= "Guardar" />
+					</form>
+					<form action="">
+						<h2>Borrar un libro</h2>
+						<select name="" id="">
+							<option value="">1 (ej)</option>
+							<option value="">2 (ej)</option>
+						</select>
+						<input type= "submit" id='borrar_button'value= "Borrar" />
 					</form>
 				</div>
 			</div>

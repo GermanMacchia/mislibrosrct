@@ -1,17 +1,14 @@
 import React from 'react';
 import axios from 'axios';
-import Login from './Login';
 import Registro from './Registro';
-
+import LoginForm from './LoginForm'
 
 export default function SignIn () {
-
-
 
 	return(
 		<>
 			<div id="log">
-				<Login />
+				<LoginForm />
 				<Registro />
 			</div>
 		</>

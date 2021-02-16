@@ -1,23 +1,14 @@
 import Router from './Router';
 import axios from 'axios';
 
-import { Provider } from 'react-redux';
-import { createStore, combineReducers  } from 'redux';
-import MisLibrosReducer from './MisLibrosReducer';
 
-
-var store = createStore(MisLibrosReducer);
-
-function App() {
+export default function App() {
+	
 
 
   return (
-  	<Provider store = {store}>
-	    <div className="App">
-	        <Router />
-	    </div>
-    </Provider>
+	<Router />
   );
 }
 
-export default App;
+ 

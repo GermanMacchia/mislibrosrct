@@ -3,31 +3,25 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 
 import LibrosForm from './LibrosForm'
+import LibrosList from './LibrosList'
 
 
 
 function Biblioteca (props) {
 
-	const [libros, setLibros] = useState({});
-
-
 
 	return(
-		<>
-			<div className='display'>
-				<div className='contentForm'>
-					<LibrosForm />
-				</div>
-				<div className='contentList'>
-					<h1> Libros list </h1>
-				</div>
+		<div className='display'>
+			<div className='contentForm'>
+				<LibrosForm />
 			</div>
-		</>
-		)
+				<LibrosList />
+		</div>
+	)
 }
 
 const mapStateToProps = (state) =>{
-	return {token: state}
+	return {libros: state}
 }
 
 export default connect(mapStateToProps, null)(Biblioteca);

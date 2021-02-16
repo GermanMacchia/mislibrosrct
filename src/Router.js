@@ -4,29 +4,29 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Header from './Components/Header';
 import SignIn from './Components/SignIn';
 import Home from './Components/Home';
-import Biblioteca from './Components/Biblioteca';
+import Categorias from './Components/Categorias';
+import Personas from './Components/Personas';
 
-class Router extends Component {
+
+export default function Router (){
 
 
-	render(){
+	return(
 
-		return(
+		<BrowserRouter> 
 
-			<BrowserRouter> 
-
-				<Header />
+			<Header />
+				
+				<Switch>
+					<Route exact path="/" component={SignIn} />
+					<Route exact path="/home" component={Home} />
 					
-					<Switch>
-						<Route exact path="/" component={SignIn} />
-						<Route exact path="/home" component={Home} />
-						<Route exact path="/biblioteca" component={Home} />
-						<Route component={Error} />
-					</Switch>
-			
-			</BrowserRouter>
-		);
-	}
+					<Route exact path="/categoria" component={Categorias} />
+					<Route exact path="/personas" component={Personas} />
+					<Route component={Error} />
+				</Switch>
+		
+		</BrowserRouter>
+	);	
 }
 
-export default Router;

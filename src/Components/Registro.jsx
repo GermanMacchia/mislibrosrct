@@ -18,7 +18,7 @@ export default function Registro () {
 					<input type="text" placeholder="Ingrese un email" /><br/>
 					<label>Celu </label>
 					<input type="text" placeholder="Nro. de contacto"/><br/><br/>
-					<input type= "submit" value= "Registrate" />
+					<input className="button" type= "submit" value= "Registrate" />
 				</form>
 			</div>
 		);
