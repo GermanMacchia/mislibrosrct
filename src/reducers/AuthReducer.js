@@ -1,9 +1,9 @@
 
-export default function MisLibrosReducer (state = [], action) {
+export default function AuthReducer (state = [], action) {
 	switch (action.type){
 		case 'TOKEN':
 			return [...state, action.data];
-		case 'LIBROS':
+		case 'READY':
 			return [...state, action.data];
 		default:
 			return state;

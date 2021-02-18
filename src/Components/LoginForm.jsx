@@ -9,6 +9,7 @@ import Home from './Home'
 function LoginForm (props) {
 
 	const history = useHistory();
+
 	const [form, setForm] = useState({
 								user:'',
 								pass:''
@@ -28,10 +29,13 @@ function LoginForm (props) {
 			await axios.post(`//localhost:8000/login`, form)
 				.then( (res) => {
 					if(res.data.token != null || undefined){
+
 						console.log('conexion exitosa');
-						const token = res.data;
-						props.onSave(token)
-						history.push("/home");
+
+						const token = res.data.token;
+						props.onSave({token});
+						history.push('/home');
+						
 					}else{
 						console.log('Error de Login')
 					}
@@ -43,7 +47,7 @@ function LoginForm (props) {
 		}
 
 		postLogin();
-    }
+	}
 
 	return(
 		<div className= "Logform">

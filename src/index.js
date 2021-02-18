@@ -5,9 +5,10 @@ import './index.css';
 import App from './App';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import MisLibrosReducer from './MisLibrosReducer';
+import reducer from './reducers/index'
 
-const store = createStore(MisLibrosReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+
+const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
  );
   		  	  	
 
