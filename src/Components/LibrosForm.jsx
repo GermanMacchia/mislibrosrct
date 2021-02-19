@@ -15,9 +15,6 @@ function LibrosForm (props) {
 
 
 	const [libroList, setLibroList] = useState();
-	const [options, setOptions] = useState();
-	const [params, setParams] = useState();
-	
 
 	useEffect(() => {
 
@@ -38,15 +35,6 @@ function LibrosForm (props) {
 		
 	}, [])
 
-
-	useEffect(() => {
-	if(libroList != undefined){
-		const optionAux = libroList.map((libro, index) => (
-            	<option key={index}>{index} {libro.nombre}</option>
-	        ))
-		setOptions(optionAux);
-		}
-	}, [libroList])
 
 	const handleNuevoLibro = (e) => {
 		setLibro({
@@ -79,35 +67,6 @@ function LibrosForm (props) {
 		document.getElementById("Tregistro").reset();
 	}
 
-
-	const handleSelect = (e) => {
-		let num = e.target.value[0];
-		setParams(libroList[num].id);
-			console.log(params) //BUGGIE
-	}
-
-
-	const handleDelete = (e) => {
-		e.preventDefault()
-
-			async function deleteLibro () { 
-				await axios({
-				    method: 'post',
-				    url: `//localhost:8000//libro/:id`,
-				    params: e.target.value,
-				    headers: {'Authorization': props.state.AuthReducer[0].token}
-				    })
-				.then((res) => {
-					console.log('delete exitoso')
-					setNewPost(newPost + 1);
-				})
-				.catch((error) => {
-				  console.error(error)
-				});
-			}
-		deleteLibro ();
-	}
-
 	return(
 			<div className= "homeform">
 				<h2>Ingresar un libro</h2>
@@ -126,13 +85,6 @@ function LibrosForm (props) {
 						<label className="descripcion" >Descripcion </label><br/>
 						<textarea type="textarea" name="descripcion" onChange={handleNuevoLibro} placeholder="Descripcion" /><br/><br/>
 						<input type= "submit" id='guardar_button' onClick= {handleSubmit} value= "Guardar" />
-					</form>
-					<form action="Delete">
-						<h2>Borrar un libro</h2>
-						<select onChange= {handleSelect}>
-							{options}
-						</select>
-						<input type= "submit" id='borrar_button'value= "Borrar" onClick = {handleDelete} />
 					</form>
 				</div>
 			</div>

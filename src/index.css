@@ -135,6 +135,14 @@ code {
     text-align: center;
 }
 
+#descripcion_titulo{
+    width:45%;
+}
+
+#devolverBtt{
+    text-align: center;
+}
+
 #borrar_button{
     border-radius: 50px 50px 50px 50px;
     color: #F13030;
@@ -143,9 +151,6 @@ code {
 #guardar_button{
     border-radius: 50px 50px 50px 50px;
     color: #3554C6;
-}
-#borrar_button:hover{
-    cursor: pointer;
 }
 
 #guardar_button:hover{
@@ -176,6 +181,11 @@ td {
     text-align: justify;
     font-size: 15px;
 }
+
+#deleteBtt{
+    text-align: center;
+}
+
 table p {
     font-size: 15px;
     vertical-align: top;
