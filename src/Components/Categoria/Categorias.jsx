@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 
-import Nav from './Nav';
+import Nav from '../Home/Nav';
 import CategoriaForm from './CategoriaForm'
 import CategoriaList from './CategoriaList'
 

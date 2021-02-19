@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import Header from './Components/Header';
-import SignIn from './Components/SignIn';
-import Home from './Components/Home';
-import Categorias from './Components/Categorias';
-import Personas from './Components/Personas';
+import Header from './Components/Home/Header';
+import SignIn from './Components/Login/SignIn';
+import Home from './Components/Home/Home';
+import Categorias from './Components/Categoria/Categorias';
+import Personas from './Components/Persona/Personas';
 
 
 export default function Router (){

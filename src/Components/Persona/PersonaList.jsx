@@ -9,6 +9,27 @@ function PersonaList(props) {
     const [personas, setPersonas] = useState();
     const [reload, setReload] = useState(0)
 
+   /* const handleReset = (e) => {
+        e.preventDefault();
+
+        async function resetPersona() {
+            await axios ({
+                methor: 'get',
+                url: `//localhost:8000/persona/reset`,
+                headers: { 'Authorization': props.state.AuthReducer[0].token }
+            })
+            .then((res) => {
+                console.log('Reset exitoso');
+                setReload(reload + 1);
+                alert('Se han reseteado los parametros correctamente')
+            })
+            .catch((error) => {
+                console.error(error)
+            });
+        }
+
+        resetPersona();
+    } */
 
     const handleDelete = (e) => {
         e.preventDefault()
@@ -79,6 +100,7 @@ function PersonaList(props) {
     return (
         <div className='contentList'>
 			<h2>Lista de Personas</h2>
+        {/* <button className="reset" onClick= {handleReset}>Reset ID</button>  */}
 			<table>
 				<thead>
 					<tr>

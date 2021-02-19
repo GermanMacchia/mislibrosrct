@@ -33,6 +33,7 @@ function CategoriaForm (props) {
 				})
 				.catch((error) => {
 				  console.error(error)
+				  alert('Categoria existente')
 				});
 			}
 		postCategoria ();

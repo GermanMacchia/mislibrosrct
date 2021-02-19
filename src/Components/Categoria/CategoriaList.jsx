@@ -7,8 +7,29 @@ function CategoriaList (props) {
 
     const [categoriasHtml, setCategoriasHtml] = useState();
     const [categorias, setCategorias] = useState();
-    const [reload, setReload] = useState(0)
+    const [reload, setReload] = useState(0);
 
+  /*  const handleReset = (e) => {
+        e.preventDefault();
+
+        async function resetCategoria() {
+            await axios ({
+                methor: 'get',
+                url: `//localhost:8000/categoria/reset`,
+                headers: { 'Authorization': props.state.AuthReducer[0].token }
+            })
+            .then((res) => {
+                console.log('Reset exitoso');
+                setReload(reload + 1);
+                alert('Se han reseteado los parametros correctamente')
+            })
+            .catch((error) => {
+                console.error(error)
+            });
+        }
+
+        resetCategoria();
+    } */
 
     const handleDelete = (e) => {
         e.preventDefault()
@@ -19,7 +40,7 @@ function CategoriaList (props) {
                 await axios({
                         method: 'delete',
                         url: `//localhost:8000/categoria/` + e.target.value,
-                        headers: { 'Authorization': props.state.AuthReducer[0].token },
+                        headers: { 'Authorization': props.state.AuthReducer[0].token }
                     })
                     .then((res) => {
                         console.log('delete exitoso')
@@ -45,6 +66,7 @@ function CategoriaList (props) {
                 })
                 .then((res) => {
                     setCategorias(res.data.respuesta)
+                    console.log(res.data.respuesta)
                 })
                 .catch((error) => {
                     console.error(error)
@@ -75,6 +97,7 @@ function CategoriaList (props) {
     return (
         <div className='contentList'>
 			<h2>Lista de categorias</h2>
+    {/* <button className="reset" onClick= {handleReset}>Reset ID</button> */}
 			<table>
 				<thead>
 					<tr>

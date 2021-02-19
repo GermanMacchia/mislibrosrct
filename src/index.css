@@ -115,9 +115,7 @@ code {
     height: 400px;
     border: solid #EBA9F1 5px;
     border-radius: 20px 20px 20px 20px;
-    clear: both;
     min-width: 250px;
-    float: left;
 }
 
 .contentList {
@@ -125,7 +123,6 @@ code {
     height: 400px;
     border: solid #EBA9F1 5px;
     border-radius: 20px 20px 20px 20px;
-    clear: both;
     overflow-y: scroll;
 
 }
@@ -155,11 +152,26 @@ code {
 
 #guardar_button:hover{
     cursor: pointer;
+    background-color: red;
+    color: white;
 }
 
 .button:hover{
     cursor: pointer;
+
 }
+
+ .reset{
+    margin: 0px 0px 5px 5px;
+
+ }
+
+  .reset:hover{
+    cursor: pointer;
+    background-color: red;
+    color: white;
+
+ }
 
 table {
 width: 100%;
@@ -222,12 +234,67 @@ table p {
     }
 
     .contentForm {
-        width: 33%;
         height: 470px;
-        border: solid #EBA9F1 5px;
-        clear: both;
-        min-width: 250px;
-        float: left;
+    }
+
+    .contentList {
+    height: 470px;
+    }
+
+    #Lregistro{
+        padding-right: 30px;
+    }
+
+     #Tregistro{
+        padding-right: 30px;
+    }
+
+    #Pregistro {
+        text-align: center;
+
+    }
+
+    #Cregistro {
+        text-align: center;
+    }
+
+}
+
+@media (max-width:812px) {
+
+    .contentList {
+        height: 470px;
+        width: auto;
+    }
+
+    .display {
+        display: block;
+    }
+
+    .contentForm {
+        width: 97.5%;  
+        text-align: center;
+    }
+
+    nav ul a {
+        font-size: 13px;
+    }
+
+    #Lregistro {
+        text-align: center;
+    }
+
+    #Tregistro {
+        text-align: center;
+    }
+
+
+    #Cregistro {
+        text-align: center;
+    }
+
+    #Pregistro {
+        text-align: center;
     }
 
 }

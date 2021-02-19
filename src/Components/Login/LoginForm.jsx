@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { useHistory } from "react-router-dom";
 
 import axios from 'axios';
-import Home from './Home'
+import Home from '../Home/Home'
 
 
 function LoginForm (props) {
