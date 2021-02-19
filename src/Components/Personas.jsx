@@ -3,14 +3,12 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import Nav from './Nav';
 
-import LibrosForm from './LibrosForm'
+import PersonaForm from './PersonaForm'
+import PersonaList from './PersonaList'
 
 
 
 function Personas (props) {
-
-	const [libros, setLibros] = useState({});
-
 
 
 	return(
@@ -18,11 +16,9 @@ function Personas (props) {
 			<Nav />
 			<div className='display'>
 				<div className='contentForm'>
-					<LibrosForm />
+					<PersonaForm />
 				</div>
-				<div className='contentList'>
-					<h1> Aca Personas </h1>
-				</div>
+					<PersonaList />
 			</div>
 		</>
 		)

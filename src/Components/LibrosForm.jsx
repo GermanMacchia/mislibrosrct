@@ -14,28 +14,6 @@ function LibrosForm (props) {
 			})
 
 
-	const [libroList, setLibroList] = useState();
-
-	useEffect(() => {
-
-		async function getLibros () { 
-			await axios.get(`//localhost:8000/libro`, {
-				  headers: {
-				    'Authorization': props.state.AuthReducer[0].token
-				  }
-				})
-				.then((res) => {
-				  setLibroList(res.data.respuesta)
-				})
-				.catch((error) => {
-				  console.error(error)
-				});
-			}
-		getLibros ();
-		
-	}, [])
-
-
 	const handleNuevoLibro = (e) => {
 		setLibro({
 			...libro,

@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import Nav from './Nav';
-import LibrosForm from './LibrosForm'
 
+import Nav from './Nav';
+import CategoriaForm from './CategoriaForm'
+import CategoriaList from './CategoriaList'
 
 
 function Categorias (props) {
@@ -17,11 +18,9 @@ function Categorias (props) {
 			<Nav />
 			<div className='display'>
 				<div className='contentForm'>
-					<LibrosForm />
+					<CategoriaForm />
 				</div>
-				<div className='contentList'>
-					<h1> Aca Categorias </h1>
-				</div>
+					<CategoriaList />
 			</div>
 		</>
 		)

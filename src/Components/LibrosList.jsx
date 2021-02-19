@@ -46,7 +46,7 @@ function LibrosList (props) {
 					    headers: {'Authorization': props.state.AuthReducer[0].token},
 					    })
 					.then((res) => {
-						console.log('delvolución exitosa')
+						console.log('deluvolución exitosa')
 						alert("El libro a vuelto a tu bibiblioteca")
 						setReload(reload + 1 )
 
@@ -69,7 +69,6 @@ function LibrosList (props) {
 				})
 				.then((res) => {
 				  setLibros(res.data.respuesta)
-				  props.onSave(res.data.respuesta)
 				})
 				.catch((error) => {
 				  console.error(error)
@@ -90,7 +89,7 @@ function LibrosList (props) {
 	                <td id="categorialibro"><p>{libro.categoria_id}</p></td>    
 	                <td id="descripcionlibro"><p>{libro.descripcion}</p></td>
 	            	<td id="personalibro"><p>{libro.persona_id}</p></td>
-	            	<td id="devolverBtt"><button onClick={handleDevolver} value= {libro.id}>☺</button></td>
+	            	<td id="devolverBtt"><button onClick={handleDevolver} value= {libro.id}>↕</button></td>
 	            	<td id="deleteBtt"><button onClick={handleDelete} value= {libro.id}>X</button></td>
 	            </tr>
 	        ))
@@ -110,7 +109,8 @@ function LibrosList (props) {
 	                    <th>Nombre</th>
 	                    <th>Categoría</th>
 	                    <th id='descripcion_titulo'>Descripción</th>
-	                    <th>Prestado</th>
+	                    <th>Persona
+	                    	-ID-</th>
 	                    <th>Devolver</th>
 	                    <th>Borrar</th>
 	                    
@@ -128,10 +128,5 @@ const mapStateToProps = (state) =>{
 	return {state}
 }
 
-const mapActionsToProps = (dispatch) => ({
-	onSave: (dblibros) => dispatch({type:'LIBROS', data: dblibros})
-	})
-
-
-export default connect(mapStateToProps, mapActionsToProps)(LibrosList);
+export default connect(mapStateToProps, null)(LibrosList);
 
