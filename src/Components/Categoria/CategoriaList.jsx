@@ -97,7 +97,7 @@ function CategoriaList (props) {
     return (
         <div className='contentList'>
 			<h2>Lista de categorias</h2>
-    {/* <button className="reset" onClick= {handleReset}>Reset ID</button> */}
+        {/* <button className="reset" onClick= {handleReset}>Reset ID</button> */}
 			<table>
 				<thead>
 					<tr>
