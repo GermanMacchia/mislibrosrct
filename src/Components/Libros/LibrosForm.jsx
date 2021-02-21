@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import { useAlert } from 'react-alert';
 
 function LibrosForm (props) {
 
-	const [newPost, setNewPost] = useState(0);
+	const alert = useAlert();
 
+	const [newPost, setNewPost] = useState(0);
 	const [libro, setLibro] = useState({
 		    nombre: " ",
 		    descripcion: " ",
@@ -32,7 +34,7 @@ function LibrosForm (props) {
 				    headers: {'Authorization': props.state.AuthReducer[0].token}
 				    })
 				.then((res) => {
-					console.log('post exitoso')
+					alert.success(`Libro agregado`)
 					setNewPost(newPost + 1);
 					props.onSave(newPost);
 				})

@@ -1,27 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-
+import { useAlert } from 'react-alert';
 
 function PersonaList(props) {
+
+    const alert = useAlert()
 
     const [personasHtml, setPersonasHtml] = useState();
     const [personas, setPersonas] = useState();
     const [reload, setReload] = useState(0)
 
-   /* const handleReset = (e) => {
+    const handleReset = (e) => {
         e.preventDefault();
 
         async function resetPersona() {
             await axios ({
-                methor: 'get',
-                url: `//localhost:8000/persona/reset`,
+                method: 'put',
+                url: `//localhost:8000/p.reset`,
                 headers: { 'Authorization': props.state.AuthReducer[0].token }
             })
             .then((res) => {
                 console.log('Reset exitoso');
                 setReload(reload + 1);
-                alert('Se han reseteado los parametros correctamente')
+                alert.success('Se han reseteado los parametros')
             })
             .catch((error) => {
                 console.error(error)
@@ -29,7 +31,7 @@ function PersonaList(props) {
         }
 
         resetPersona();
-    } */
+    } 
 
     const handleDelete = (e) => {
         e.preventDefault()
@@ -43,13 +45,13 @@ function PersonaList(props) {
                         headers: { 'Authorization': props.state.AuthReducer[0].token },
                     })
                     .then((res) => {
-                        console.log('delete exitoso')
+                        alert.success('Se ha borrado correctamente')
                         setReload(reload + 1)
 
                     })
                     .catch((error) => {
                         console.error(error)
-                        alert('No es posible borrar, la persona tiene libros prestados')
+                        alert.error('¡No se puede borrar! La persona tiene libros prestados')
                     });
             }
         }
@@ -100,7 +102,7 @@ function PersonaList(props) {
     return (
         <div className='contentList'>
 			<h2>Lista de Personas</h2>
-        {/* <button className="reset" onClick= {handleReset}>Reset ID</button>  */}
+            <button className="reset" onClick= { handleReset }>Reset ID</button> 
 			<table>
 				<thead>
 					<tr>

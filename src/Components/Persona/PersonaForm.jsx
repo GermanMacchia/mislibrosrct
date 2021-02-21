@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useAlert } from 'react-alert';
 import { connect } from 'react-redux';
 
 function PersonaForm (props) {
 
-	const [newPost, setNewPost] = useState(0);
+	const alert = useAlert()
 
+	const [newPost, setNewPost] = useState(0);
 	const [persona, setPersona] = useState({
 		    nombre: " ",
 		    apellido: " ",
@@ -31,12 +33,13 @@ function PersonaForm (props) {
 				    headers: {'Authorization': props.state.AuthReducer[0].token}
 				    })
 				.then((res) => {
-					console.log('post exitoso')
+					alert.success('Persona agregada')
 					setNewPost(newPost + 1);
 					props.onSave(newPost);
 				})
 				.catch((error) => {
 				  console.error(error)
+				  alert.error('Error de datos')
 				});
 			}
 		postPersona ();

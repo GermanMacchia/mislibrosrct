@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useAlert } from 'react-alert';
 
 export default function Registro () {
-		
+	
+	const alert = useAlert()
+
 	const [user, setUser] = useState({
 		usuario: " ",
 		clave: " ",
@@ -24,12 +27,11 @@ export default function Registro () {
 		async function registro () {
 			await axios.post(`//localhost:8000/registro`, user)
 			    .then((res) => {
-                    alert('El registro ha sido exitoso')
-                    console.log('registro exitoso')
+                    alert.success('Se ha Registrado correctamente')
                 })
                 .catch((error) => {
                     console.error(error)
-                    alert('Ese nombre de usuario ya esta registrado')
+                    alert.error('Nombre de usuario ya registrado')
                 });
         }
         registro();

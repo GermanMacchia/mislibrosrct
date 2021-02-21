@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from "react-router-dom";
-
+import { useAlert } from 'react-alert';
 import axios from 'axios';
 import Home from '../Home/Home'
 
@@ -9,7 +9,8 @@ import Home from '../Home/Home'
 function LoginForm (props) {
 
 	const history = useHistory();
-
+	const alert = useAlert()
+	
 	const [form, setForm] = useState({
 								user:'',
 								pass:''
@@ -28,21 +29,19 @@ function LoginForm (props) {
     	async function postLogin () { 
 			await axios.post(`//localhost:8000/login`, form)
 				.then( (res) => {
+
 					if(res.data.token != null || undefined){
-
-						console.log('conexion exitosa');
-
 						const token = res.data.token;
 						props.onSave({token});
+						alert.success(`¡Bienvenido ${form.user}!`);
 						history.push('/home');
-						
+					
 					}else{
 						console.log('Error de Login')
 					}
-				})
+				} )
 				.catch( (error) => {
-				    console.log('Error de datos');
-				    alert('Error de Datos');
+				    alert.error('Error de Datos');
 				});
 		}
 

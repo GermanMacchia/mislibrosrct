@@ -1,14 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-
+import { useAlert } from 'react-alert';
 
 function LibrosList (props) {
+
+	const alert = useAlert();
 
 	const [librosHtml, setLibrosHtml] = useState();
 	const [libros, setLibros] = useState();
 	const [reload, setReload] = useState(0)
-
 
 	const handleDelete = (e) => {
 		e.preventDefault()
@@ -22,13 +23,12 @@ function LibrosList (props) {
 					    headers: {'Authorization': props.state.AuthReducer[0].token},
 					    })
 					.then((res) => {
-						console.log('delete exitoso')
+						alert.success('Se ha borrado correctamente')
 						setReload(reload + 1 )
-
 					})
 					.catch((error) => {
 					  	console.error(error)
-					  	alert(`El libro esta prestado, no es posible borrarlo`)
+					  	alert.error(`¿El libro esta prestado! No es posible borrarlo`)
 
 					});
 				}
@@ -38,29 +38,28 @@ function LibrosList (props) {
 
 	const handleDevolver = (e) => {
 		e.preventDefault()
+
 		async function devolverLibro () {
+				await axios({
+				    method: 'put',
+				    url: `//localhost:8000/libro/devolver/` + e.target.value,
+				    headers: {'Authorization': props.state.AuthReducer[0].token},
+				    })
+				.then((res) => {
+					alert.success("El libro a vuelto a tu bibiblioteca")
+					setReload(reload + 1 )
 
-					await axios({
-					    method: 'put',
-					    url: `//localhost:8000/libro/devolver/` + e.target.value,
-					    headers: {'Authorization': props.state.AuthReducer[0].token},
-					    })
-					.then((res) => {
-						console.log('deluvolución exitosa')
-						alert("El libro a vuelto a tu bibiblioteca")
-						setReload(reload + 1 )
-
-					})
-					.catch((error) => {
-					  	console.error(error)
-					  	alert("El libro no esta prestado")
-					}
+				})
+				.catch((error) => {
+				  	console.error(error)
+				  	alert.show("El libro no esta prestado")
+				}
 		)}
 		devolverLibro();
 	}
 
-	useEffect(() => {
 
+	useEffect(() => {
 		async function getLibros () { 
 			await axios.get(`//localhost:8000/libro`, {
 				  headers: {
@@ -79,9 +78,7 @@ function LibrosList (props) {
 	}, [props.state.ChangeReducer, reload])
 
 	useEffect(() => {
-
 		if(libros != undefined){
-
 	        const librosAux = libros.map((libro, index) => (
 	            <tr key={index}>
 	            	<td id="indexlibro"><p><strong>{index + 1}</strong></p></td> 

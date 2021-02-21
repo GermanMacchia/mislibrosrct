@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import { useAlert } from 'react-alert';
 
 function CategoriaForm (props) {
 
-	const [newPost, setNewPost] = useState(0);
+	const alert = useAlert();
 
+	const [newPost, setNewPost] = useState(0);
 	const [categoria, setCategoria] = useState({
 		    nombre: " "
 			})
@@ -27,13 +29,13 @@ function CategoriaForm (props) {
 				    headers: {'Authorization': props.state.AuthReducer[0].token}
 				    })
 				.then((res) => {
-					console.log('post exitoso')
+					alert.success('Nueva categoria agregada')
 					setNewPost(newPost + 1);
 					props.onSave(newPost);
 				})
 				.catch((error) => {
 				  console.error(error)
-				  alert('Categoria existente')
+				  alert.error('Categoria existente')
 				});
 			}
 		postCategoria ();

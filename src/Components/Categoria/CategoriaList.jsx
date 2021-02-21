@@ -1,27 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-
+import { useAlert } from 'react-alert';
 
 function CategoriaList (props) {
+
+    const alert = useAlert()
 
     const [categoriasHtml, setCategoriasHtml] = useState();
     const [categorias, setCategorias] = useState();
     const [reload, setReload] = useState(0);
 
-  /*  const handleReset = (e) => {
+    const handleReset = (e) => {
         e.preventDefault();
 
         async function resetCategoria() {
             await axios ({
-                methor: 'get',
-                url: `//localhost:8000/categoria/reset`,
+                method: 'put',
+                url: `//localhost:8000/c.reset`,
                 headers: { 'Authorization': props.state.AuthReducer[0].token }
             })
             .then((res) => {
-                console.log('Reset exitoso');
+                alert.success('Se han reseteado los parametros');
                 setReload(reload + 1);
-                alert('Se han reseteado los parametros correctamente')
             })
             .catch((error) => {
                 console.error(error)
@@ -29,7 +30,7 @@ function CategoriaList (props) {
         }
 
         resetCategoria();
-    } */
+    } 
 
     const handleDelete = (e) => {
         e.preventDefault()
@@ -43,12 +44,13 @@ function CategoriaList (props) {
                         headers: { 'Authorization': props.state.AuthReducer[0].token }
                     })
                     .then((res) => {
-                        console.log('delete exitoso')
+                        alert.success('Se ha borrado correctamente')
                         setReload(reload + 1)
 
                     })
                     .catch((error) => {
                         console.error(error)
+                        alert.error('¡No se puede borrar! Esta categoria tiene libros asociados!')
                     });
             }
         }
@@ -66,7 +68,6 @@ function CategoriaList (props) {
                 })
                 .then((res) => {
                     setCategorias(res.data.respuesta)
-                    console.log(res.data.respuesta)
                 })
                 .catch((error) => {
                     console.error(error)
@@ -97,7 +98,7 @@ function CategoriaList (props) {
     return (
         <div className='contentList'>
 			<h2>Lista de categorias</h2>
-        {/* <button className="reset" onClick= {handleReset}>Reset ID</button> */}
+            <button className="reset" onClick= {handleReset}>Reset ID</button> 
 			<table>
 				<thead>
 					<tr>
