@@ -56,7 +56,6 @@ nav ul a:hover {
 }
 
 
-
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
         monospace;
@@ -196,6 +195,10 @@ td {
 }
 
 #deleteBtt{
+    text-align: center;
+}
+
+#librosPrestados{
     text-align: center;
 }
 
