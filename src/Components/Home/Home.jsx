@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { connect } from 'react-redux';
 
 import Biblioteca from '../Libros/Biblioteca';
@@ -6,14 +6,13 @@ import Nav from './Nav';
 
 
 
-export default function Home (props) {
+export default function Home () {
 
-		return(
-			<>
-				<Nav />
-				<Biblioteca />
-			</>
-
-		);
-	}
+		return (
+				<>
+					<Nav />
+					<Biblioteca />
+				</>
+			)
+}
 
