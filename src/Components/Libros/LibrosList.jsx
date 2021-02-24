@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
+import EditarLibro from './EditarLibro'
 import { connect } from 'react-redux';
 import { useAlert } from 'react-alert';
 
@@ -9,6 +10,8 @@ function LibrosList (props) {
 
 	const [librosHtml, setLibrosHtml] = useState();
 	const [libros, setLibros] = useState();
+	const [editar, setEditar] = useState();
+	const [libro, setLibro] = useState();
 	const [reload, setReload] = useState(0)
 
 	const handleDelete = (e) => {
@@ -34,6 +37,17 @@ function LibrosList (props) {
 				}
 			}
 		deleteLibro ();
+	}
+
+	// EDITAR LIBRO
+
+	const handleEditar = (e) => {
+		e.preventDefault()
+		
+			async function editarLibro (e) {
+				setEditar(<EditarLibro id={e.target.value} />);
+			}
+		editarLibro(e);
 	}
 
 	const handleDevolver = (e) => {
@@ -75,7 +89,7 @@ function LibrosList (props) {
 			}
 		getLibros ();
 		
-	}, [props.state.ChangeReducer, reload])
+	}, [props.state.ChangeReducer, reload, editar])
 
 	useEffect(() => {
 		if(libros != undefined){
@@ -88,6 +102,7 @@ function LibrosList (props) {
 	            	<td id="personalibro"><p>{libro.persona_id}</p></td>
 	            	<td id="devolverBtt"><button onClick={handleDevolver} value= {libro.id}>↕</button></td>
 	            	<td id="deleteBtt"><button onClick={handleDelete} value= {libro.id}>X</button></td>
+					<td id="editarBtt"><button onClick={handleEditar} value= {libro.id}>E</button></td>
 	            </tr>
 	        ))
 			setLibrosHtml(librosAux);
@@ -110,6 +125,7 @@ function LibrosList (props) {
 	                    	-ID-</th>
 	                    <th>Devolver</th>
 	                    <th>Borrar</th>
+						<th>Editar</th>
 	                    
 	                </tr>
                 </thead>
@@ -117,6 +133,7 @@ function LibrosList (props) {
 	                {librosHtml}
 	            </tbody>
 	        </table>
+			{editar}
 		</div>
 	);
 }

@@ -25,6 +25,7 @@ function LibrosForm (props) {
 
 	const handleSubmit = (e) => {
 		e.preventDefault()
+		console.log(libro.persona_id);
 
 		async function postLibros () { 
 				await axios({
