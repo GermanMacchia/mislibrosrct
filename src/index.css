@@ -1,11 +1,8 @@
 body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-        sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-
     background-image: linear-gradient(to right bottom, #32253d, #422d4f, #543461, #683b72, #7d4283, #744c90, #69569b, #5c5fa5, #2e669b, #1c6787, #306570, #45605f);
 }
 
@@ -20,7 +17,6 @@ body {
     border-radius: 20px 20px 20px 20px;
     border: solid black 5px;
     float: right;
-
 }
 
 #header h1 {
@@ -39,7 +35,6 @@ nav {
     margin: 10px 20px 0px 20px;
     border-top: solid #EBA9F1 5px;
     display: block;
-
 }
 
 nav ul a {
@@ -48,18 +43,14 @@ nav ul a {
     margin: -20px 50px 0px -40px;
     color: #26D632;
     font-size: 20px;
-
 }
 
 nav ul a:hover {
     color: #F22572;
 }
 
-
-
 code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-        monospace;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
 #log {
@@ -98,7 +89,6 @@ code {
 .homeform textarea {
     width: 160px;
     height: 130px;
-
 }
 
 .homeform label {
@@ -124,7 +114,6 @@ code {
     border: solid #EBA9F1 5px;
     border-radius: 20px 20px 20px 20px;
     overflow-y: scroll;
-
 }
 
 .contentList h2 {
@@ -132,50 +121,48 @@ code {
     text-align: center;
 }
 
-#descripcion_titulo{
-    width:45%;
+#descripcion_titulo {
+    width: 45%;
 }
 
-#devolverBtt{
+#devolverBtt {
     text-align: center;
 }
 
-#borrar_button{
+#borrar_button {
     border-radius: 50px 50px 50px 50px;
     color: #F13030;
     margin-left: 50px;
 }
-#guardar_button{
-    border-radius: 50px 50px 50px 50px;
+
+#guardar_button {
+    border-radius: 50px;
     color: #3554C6;
 }
 
-#guardar_button:hover{
+#guardar_button:hover {
     cursor: pointer;
     background-color: red;
     color: white;
 }
 
-.button:hover{
+.button:hover {
     cursor: pointer;
-
 }
 
- .reset{
+.reset {
     margin: 0px 0px 5px 5px;
+}
 
- }
-
-  .reset:hover{
+.reset:hover {
     cursor: pointer;
     background-color: red;
     color: white;
-
- }
+}
 
 table {
-width: 100%;
-padding-left: 5px;
+    width: 100%;
+    padding-left: 5px;
 }
 
 th {
@@ -183,7 +170,6 @@ th {
     font-size: 20px;
     text-align: center;
     background-color: #8D0DBC;
-
 }
 
 tr:nth-child(odd) {
@@ -195,7 +181,7 @@ td {
     font-size: 15px;
 }
 
-#deleteBtt{
+#deleteBtt {
     text-align: center;
 }
 
@@ -206,95 +192,93 @@ table p {
     text-align: center;
 }
 
-
 .display {
     display: inline-flex;
     width: 100%;
 }
 
-
 @media (max-width:1178px) {
-
     .floatLeft {
         float: none;
         margin-left: 50px;
     }
-
     .homeform {
         text-align: left;
     }
-
     .bigtext {
         margin-left: 50px;
     }
-
     .homeform h2 {
         color: #EC7015;
         text-align: center;
     }
-
     .contentForm {
         height: 470px;
     }
-
     .contentList {
-    height: 470px;
+        height: 470px;
     }
-
-    #Lregistro{
+    #Lregistro {
         padding-right: 30px;
     }
-
-     #Tregistro{
+    #Tregistro {
         padding-right: 30px;
     }
-
     #Pregistro {
         text-align: center;
-
     }
-
     #Cregistro {
         text-align: center;
     }
-
 }
 
 @media (max-width:812px) {
-
     .contentList {
         height: 470px;
         width: auto;
     }
-
     .display {
         display: block;
     }
-
     .contentForm {
-        width: 97.5%;  
+        width: 97.5%;
         text-align: center;
     }
-
     nav ul a {
         font-size: 13px;
     }
-
     #Lregistro {
         text-align: center;
     }
-
     #Tregistro {
         text-align: center;
     }
-
-
     #Cregistro {
         text-align: center;
     }
-
     #Pregistro {
         text-align: center;
     }
+}
 
+.modal {
+    position: fixed;
+    top: 20%;
+    left: 20%;
+    width: 40%;
+    background-color: #2e669b;
+    border: 5px solid #EBA9F1;
+    border-radius: 5px;
+    z-index: 10;
+    padding: 1rem;
+    box-shadow: 0 10px 25px black;
+}
+
+.modal a {
+    position: absolute;
+    top: 5%;
+    left: 95%;
+    text-decoration: none;
+    color: white;
+    font-size: 1.5rem;
 }
