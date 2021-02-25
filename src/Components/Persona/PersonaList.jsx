@@ -74,7 +74,7 @@ function PersonaList(props) {
                     const listaAux = lista.map((libro, index)=>(
                             ` ${index + 1} ${JSON.stringify(libro.nombre)}`
                         ))
-                listaAux.map((libro) => {alert.show(libro)})
+                listaAux.map((libro) => {alert.success(libro)})
                                        
                 })
                 .catch((error) => {

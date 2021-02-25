@@ -8,7 +8,7 @@ function EditarLibro (props) {
 	const alert = useAlert();
 
 	const [newPost, setNewPost] = useState(0);
-	const [editado, setEditados] = useState("");	
+	const [editado, setEditados] = useState({});	
 	const [edit, setEdit] = useState({
 		nombre: " ",
 		descripcion: " ",
@@ -17,11 +17,10 @@ function EditarLibro (props) {
 		});
 
 	
-	
     useEffect(() => {
 		
 		async function getLibros () { 
-			await axios.get(`//localhost:8000/libro/`+props.id, {
+			await axios.get(`//localhost:8000/libro/`+ props.id, {
 				  headers: {
 				    'Authorization': props.state.AuthReducer[0].token
 				  }
@@ -37,8 +36,7 @@ function EditarLibro (props) {
 			
 		getLibros ();
 
-		document.getElementById("Ledit").reset();
-		document.getElementById("Tedit").reset();
+
 		const modal = document.querySelector(".modal");
 		modal.style = "opacity: 1;";
     }, [props.id])
@@ -49,9 +47,7 @@ function EditarLibro (props) {
 		setEdit({
 			...edit,
 			[e.target.name]: e.target.value
-			
 		});
-		
 	}
 	
 	const handleSubmit = (e) => {
@@ -59,7 +55,7 @@ function EditarLibro (props) {
 		async function putLibros () { 
 				await axios({
 				    method: 'put',
-				    url: `//localhost:8000/libro/`+props.id,
+				    url: `//localhost:8000/libro/`+ props.id,
 				    data: edit,
 				    headers: {'Authorization': props.state.AuthReducer[0].token}
 				    })
@@ -67,6 +63,8 @@ function EditarLibro (props) {
 					alert.success(`Libro editado`)
 					setNewPost(newPost + 1);
 					props.onSave(newPost);
+					document.getElementById("Ledit").reset();
+					document.getElementById("Tedit").reset();
 					cerrarModal();
 				})
 				.catch((error) => {
@@ -100,7 +98,7 @@ function EditarLibro (props) {
 						<label>Categoria </label><br/>
 						<input type="text" name="categoria_id" onChange={handleEditarLibro} placeholder={editado.categoria_id} disabled/><br/>
 						<label>Persona</label><br/>
-						<input type="text" name="persona_id" onChange={handleEditarLibro} placeholder={editado.persona_id} disabled/><br/>
+						<input type="text" name="persona_id" onChange={handleEditarLibro} placeholder={editado.persona_id} disabled /><br/>
 					</form>
 				</div>
 				<div className="bigtext">

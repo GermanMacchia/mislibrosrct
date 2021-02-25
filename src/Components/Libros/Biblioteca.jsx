@@ -13,6 +13,7 @@ function Biblioteca (props) {
 	return(
 		<div className='display'>
 			<div className='contentForm'>
+
 				<LibrosForm />
 			</div>
 				<LibrosList />

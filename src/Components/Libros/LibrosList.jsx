@@ -3,6 +3,10 @@ import axios from 'axios';
 import EditarLibro from './EditarLibro'
 import { connect } from 'react-redux';
 import { useAlert } from 'react-alert';
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
+import MenuBookIcon from '@material-ui/icons/MenuBook';
+import VerticalAlignBottomIcon from '@material-ui/icons/VerticalAlignBottom';
 
 function LibrosList (props) {
 
@@ -100,9 +104,10 @@ function LibrosList (props) {
 	                <td id="categorialibro"><p>{libro.categoria_id}</p></td>    
 	                <td id="descripcionlibro"><p>{libro.descripcion}</p></td>
 	            	<td id="personalibro"><p>{libro.persona_id}</p></td>
-	            	<td id="devolverBtt"><button onClick={handleDevolver} value= {libro.id}>↕</button></td>
-	            	<td id="deleteBtt"><button onClick={handleDelete} value= {libro.id}>X</button></td>
-					<td id="editarBtt"><button onClick={handleEditar} value= {libro.id}>E</button></td>
+	            	<td id= "prestarbtt"><button className="funcionBtt" value= {libro.id}>P</button></td>
+	            	<td id= "devolverbtt"><button className="funcionBtt" onClick={handleDevolver} value= {libro.id}>↕</button></td>
+	            	<td id= "borrarbtt"><button className="funcionBtt" onClick={handleDelete} value= {libro.id}>X</button></td>
+					<td id= "editarbtt"><button  className="funcionBtt" onClick={handleEditar} value= {libro.id}>E</button></td>
 	            </tr>
 	        ))
 			setLibrosHtml(librosAux);
@@ -123,9 +128,10 @@ function LibrosList (props) {
 	                    <th id='descripcion_titulo'>Descripción</th>
 	                    <th>Persona
 	                    	-ID-</th>
-	                    <th>Devolver</th>
-	                    <th>Borrar</th>
-						<th>Editar</th>
+	                    <th className="funcion tooltip"><MenuBookIcon /></th>
+	                    <th className="funcion tooltip"><div className="tooltiptext">Devolver</div><VerticalAlignBottomIcon /></th>
+	                    <th className="funcion"><DeleteIcon /></th>
+						<th className="funcion"><EditIcon /></th>
 	                    
 	                </tr>
                 </thead>
