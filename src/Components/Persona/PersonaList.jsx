@@ -13,6 +13,9 @@ function PersonaList(props) {
     const [reload, setReload] = useState(0);
     const [editar, setEditar] = useState();
 
+
+
+
     const handleReset = (e) => {
         e.preventDefault();
 
@@ -23,7 +26,6 @@ function PersonaList(props) {
                 headers: { 'Authorization': props.state.AuthReducer[0].token }
             })
             .then((res) => {
-                console.log('Reset exitoso');
                 setReload(reload + 1);
                 alert.success('Se han reseteado los parametros')
             })
@@ -53,12 +55,13 @@ function PersonaList(props) {
                     })
                     .catch((error) => {
                         console.error(error)
-                        alert.error('¡No se puede borrar! La persona tiene libros prestados')
+                        alert.error('¡La persona tiene libros asociados!')
                     });
             }
         }
         deletePersona();
     }
+    
 
     // Editar persona
 
@@ -71,6 +74,36 @@ function PersonaList(props) {
 		editarPersona(e);
                 
 	}
+      
+      
+   
+  
+    const handleLista = (e) => {
+            e.preventDefault()
+
+            async function getLibrosPrestados (id){
+                await axios.get(`//localhost:8000/persona/libro/` + id, {
+                    headers: {
+                        'Authorization': props.state.AuthReducer[0].token
+                    }
+                })
+                .then((res) => {
+                    const lista = res.data.respuesta;
+                    const listaAux = lista.map((libro, index)=>(
+                            ` ${index + 1} ${JSON.stringify(libro.nombre)}`
+                        ))
+                listaAux.map((libro) => {alert.show(libro)})
+                                       
+                })
+                .catch((error) => {
+                    console.error(error)
+                   alert.show('No tiene libros prestados')
+                });
+            }
+
+            getLibrosPrestados(e.target.value)
+
+    }
 
 
     useEffect(() => {
@@ -96,6 +129,7 @@ function PersonaList(props) {
 
         if (personas != undefined) {
 
+ 
             const personaAux = personas.map((persona, index) => (
                 <tr key={index}>
 	            	<td id="indexPersona"><p><strong>{index + 1}</strong></p></td> 
@@ -103,12 +137,15 @@ function PersonaList(props) {
 	                <td id="apellidoPersona"><p>{persona.apellido}</p></td>    
 	                <td id="emailPersona"><p>{persona.email}</p></td>
 	            	<td id="aliasPersona"><p>{persona.alias}</p></td>
-                    <td id="idPerona"><p>{persona.id}</p></td>
+                    <td id="idPersona"><p>{persona.id}</p></td>
+                    <td id="librosPrestados"><button onClick={handleLista} value= {persona.id}>O</button></td>
 	            	<td id="deleteBtt"><button onClick={handleDelete} value= {persona.id}>X</button></td>
                     <td id="editarBtt"><button onClick={handleEditar} value= {persona.id}>E</button></td>
 	            </tr>
             ))
             setPersonasHtml(personaAux);
+
+
         }
     }, [personas])
 
@@ -127,6 +164,7 @@ function PersonaList(props) {
 	                    <th>Email</th>
 	                    <th>Alias</th>
                         <th>ID</th>
+                        <th>Prestados</th>
 	                    <th>Borrar</th>
                         <th>Editar</th>
 	                    
