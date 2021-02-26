@@ -40,7 +40,7 @@ function EditarPersona (props) {
 			
 		getPersonas ();
 
-		document.querySelector("#Pregistro").reset();
+		document.querySelector("#registro").reset();
 		
 		const modal = document.querySelector(".modal");
 		modal.classList.remove("opacidad0");
@@ -102,7 +102,7 @@ function EditarPersona (props) {
 			<div className = "homeform modal">
 				<a href="#" onClick={cerrarModal}>X</a>
 				<h2>Ingresar una Persona</h2>
-					<form id="Pregistro">
+					<form id="registro">
 						<label>Nombre </label><br/>
 						<input type="text" name="nombre" onChange={handleEditarPersona} placeholder={editado.nombre} /><br/>
 						<label>Apellido</label><br/>
