@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { useAlert } from 'react-alert';
+import EditarCategoria from './EditarCategoria'
 
 function CategoriaList (props) {
 
@@ -10,6 +11,7 @@ function CategoriaList (props) {
     const [categoriasHtml, setCategoriasHtml] = useState();
     const [categorias, setCategorias] = useState();
     const [reload, setReload] = useState(0);
+    const [editar, setEditar] = useState("");
 
     const handleReset = (e) => {
         e.preventDefault();
@@ -57,6 +59,16 @@ function CategoriaList (props) {
         deleteCategoria();
     }
 
+    const handleEditar = (e) => {
+		e.preventDefault()
+		
+			async function editarCategoria (e) {
+				setEditar(<EditarCategoria id={e.target.value} />);
+			}
+		editarCategoria(e);
+                
+	}
+
 
     useEffect(() => {
 
@@ -87,6 +99,7 @@ function CategoriaList (props) {
 	                <td id="nombrecategoria"><p>{categoria.nombre}</p></td>
 	            	<td id="aliascategoria"><p>{categoria.id}</p></td>
 	            	<td id="deleteBtt"><button onClick={handleDelete} value= {categoria.id}>X</button></td>
+                    <td id="editadoBtt"><button onClick={handleEditar} value= {categoria.id}>E</button></td>
 	            </tr>
             ))
             setCategoriasHtml(categoriaAux);
@@ -106,12 +119,14 @@ function CategoriaList (props) {
 	                    <th>Nombre</th>
 	                    <th>ID</th>
 	                    <th>Borrar</th>
+                        <th>Editado</th>
 	                </tr>
                 </thead>
 	            <tbody>
 	                {categoriasHtml}
 	            </tbody>
 	        </table>
+            {editar}
 		</div>
     );
 }

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { useAlert } from 'react-alert';
+import EditarPersona from './EditarPersona'
 
 function PersonaList(props) {
 
@@ -9,7 +10,8 @@ function PersonaList(props) {
 
     const [personasHtml, setPersonasHtml] = useState();
     const [personas, setPersonas] = useState();
-    const [reload, setReload] = useState(0)
+    const [reload, setReload] = useState(0);
+    const [editar, setEditar] = useState();
 
 
 
@@ -59,7 +61,23 @@ function PersonaList(props) {
         }
         deletePersona();
     }
+    
 
+    // Editar persona
+
+    const handleEditar = (e) => {
+		e.preventDefault()
+		
+			async function editarPersona (e) {
+				setEditar(<EditarPersona id={e.target.value} />);
+			}
+		editarPersona(e);
+                
+	}
+      
+      
+   
+  
     const handleLista = (e) => {
             e.preventDefault()
 
@@ -122,6 +140,7 @@ function PersonaList(props) {
                     <td id="idPersona"><p>{persona.id}</p></td>
                     <td id="librosPrestados"><button onClick={handleLista} value= {persona.id}>O</button></td>
 	            	<td id="deleteBtt"><button onClick={handleDelete} value= {persona.id}>X</button></td>
+                    <td id="editarBtt"><button onClick={handleEditar} value= {persona.id}>E</button></td>
 	            </tr>
             ))
             setPersonasHtml(personaAux);
@@ -147,6 +166,7 @@ function PersonaList(props) {
                         <th>ID</th>
                         <th>Prestados</th>
 	                    <th>Borrar</th>
+                        <th>Editar</th>
 	                    
 	                </tr>
                 </thead>
@@ -154,6 +174,7 @@ function PersonaList(props) {
 	                {personasHtml}
 	            </tbody>
 	        </table>
+            {editar}
 		</div>
     );
 }
