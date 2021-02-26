@@ -26,7 +26,6 @@ function EditarCategoria (props) {
 				})
 				.then((res) => {
 				  setEditados(res.data.respuesta[0])
-				  console.log(res.data.respuesta[0]);
 				})
 				.catch((error) => {
 				  console.error(error)
