@@ -9,6 +9,8 @@ import EditIcon from '@material-ui/icons/Edit';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
 import PersonIcon from '@material-ui/icons/Person';
 import VerticalAlignBottomIcon from '@material-ui/icons/VerticalAlignBottom';
+import ClassIcon from '@material-ui/icons/Class';
+import FormatList from '@material-ui/icons/FormatListNumbered';
 
 function LibrosList (props) {
 
@@ -150,9 +152,17 @@ function LibrosList (props) {
 			<table>
 				<thead>
 					<tr>
-	                	<th>N°</th>
+	                	<th>
+	                		<Tooltip title= "Numero">
+	                    		<FormatList />
+	                    	</Tooltip>
+	                    </th>
 	                    <th>Nombre</th>
-	                    <th>Categoría</th>
+	                    <th>
+	                		<Tooltip title= "Categoria ID">
+	                    		<ClassIcon />
+	                    	</Tooltip>	                    	
+	                    </th>
 	                    <th id='descripcion_titulo'>Descripción</th>
 	                    <th>
 	                    	<Tooltip title= "Persona ID">

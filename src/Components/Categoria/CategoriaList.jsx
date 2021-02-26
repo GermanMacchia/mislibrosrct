@@ -2,7 +2,14 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { useAlert } from 'react-alert';
-import EditarCategoria from './EditarCategoria'
+import EditarCategoria from './EditarCategoria';
+
+import Tooltip from '@material-ui/core/Tooltip';
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
+import ClassIcon from '@material-ui/icons/Class';
+import FormatList from '@material-ui/icons/FormatListNumbered';
+import AutorenewIcon from '@material-ui/icons/Autorenew';
 
 function CategoriaList (props) {
 
@@ -98,8 +105,8 @@ function CategoriaList (props) {
 	            	<td id="indexcategoria"><p><strong>{index + 1}</strong></p></td> 
 	                <td id="nombrecategoria"><p>{categoria.nombre}</p></td>
 	            	<td id="aliascategoria"><p>{categoria.id}</p></td>
-	            	<td id="deleteBtt"><button onClick={handleDelete} value= {categoria.id}>X</button></td>
-                    <td id="editadoBtt"><button onClick={handleEditar} value= {categoria.id}>E</button></td>
+	            	<td id="deleteBtt"><button className="funcionBtt" onClick={handleDelete} value= {categoria.id}>X</button></td>
+                    <td id="editadoBtt"><button className="funcionBtt"  onClick={handleEditar} value= {categoria.id}>E</button></td>
 	            </tr>
             ))
             setCategoriasHtml(categoriaAux);
@@ -111,15 +118,33 @@ function CategoriaList (props) {
     return (
         <div className='contentList'>
 			<h2>Lista de categorias</h2>
-            <button className="reset" onClick= {handleReset}>Reset ID</button> 
+            <Tooltip title= "Reset ID +">
+                <button className="reset" onClick= { handleReset }><AutorenewIcon /></button>
+            </Tooltip> 
 			<table>
 				<thead>
 					<tr>
-	                	<th>N°</th>
+                        <th>
+                            <Tooltip title= "Numero">
+                                <FormatList />
+                            </Tooltip>
+                        </th>
 	                    <th>Nombre</th>
-	                    <th>ID</th>
-	                    <th>Borrar</th>
-                        <th>Editado</th>
+                        <th>
+                            <Tooltip title= "Categoria ID">
+                                <ClassIcon />
+                            </Tooltip>                          
+                        </th>
+                        <th className="funcion">
+                            <Tooltip title= "Borrar">
+                                <DeleteIcon />
+                            </Tooltip>
+                        </th>
+                        <th className="funcion">
+                            <Tooltip title= "Editar">
+                                <EditIcon />
+                            </Tooltip>
+                        </th>  
 	                </tr>
                 </thead>
 	            <tbody>

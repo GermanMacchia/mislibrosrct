@@ -139,11 +139,6 @@ code {
 
 }
 
-#prestarbtt{}
-#devolverbtt{}
-#prestarbtt{}
-#prestarbtt{}
-
 #salir{
     color: #F33059;
 
@@ -201,7 +196,10 @@ td {
     font-size: 15px;
 }
 
-#deleteBtt {
+#editadoBtt{
+    text-align: center;
+ }
+#deleteBtt{
     text-align: center;
 }
 

@@ -4,6 +4,18 @@ import { connect } from 'react-redux';
 import { useAlert } from 'react-alert';
 import EditarPersona from './EditarPersona'
 
+
+import Tooltip from '@material-ui/core/Tooltip';
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
+import ClassIcon from '@material-ui/icons/Class';
+import FormatList from '@material-ui/icons/FormatListNumbered';
+import MenuBookIcon from '@material-ui/icons/MenuBook';
+import PersonIcon from '@material-ui/icons/Person';
+import EmailIcon from '@material-ui/icons/Email';
+import Assignment from '@material-ui/icons/AssignmentInd';
+import AutorenewIcon from '@material-ui/icons/Autorenew';
+
 function PersonaList(props) {
 
     const alert = useAlert()
@@ -154,20 +166,49 @@ function PersonaList(props) {
     return (
         <div className='contentList'>
 			<h2>Lista de Personas</h2>
-            <button className="reset" onClick= { handleReset }>Reset ID</button> 
+            <Tooltip title= "Reset ID +">
+                <button className="reset" onClick= { handleReset }><AutorenewIcon /></button>
+            </Tooltip> 
 			<table>
 				<thead>
 					<tr>
-	                	<th>N°</th>
+                        <th>
+                            <Tooltip title= "Numero">
+                                <FormatList />
+                            </Tooltip>
+                        </th>
 	                    <th>Nombre</th>
 	                    <th>Apellido</th>
-	                    <th>Email</th>
-	                    <th>Alias</th>
-                        <th>ID</th>
-                        <th>Prestados</th>
-	                    <th>Borrar</th>
-                        <th>Editar</th>
-	                    
+                        <th>
+                            <Tooltip title= "Email">
+                                <EmailIcon />
+                            </Tooltip>
+                        </th>
+                        <th>
+                            <Tooltip title= "Alias">
+                                <Assignment />
+                            </Tooltip>
+                        </th>
+                        <th>
+                            <Tooltip title= "Persona ID">
+                                <PersonIcon />
+                            </Tooltip>
+                        </th>
+                        <th className="funcion">
+                            <Tooltip title= "Prestados">
+                                <MenuBookIcon />
+                            </Tooltip>
+                        </th>
+                        <th className="funcion">
+                            <Tooltip title= "Borrar">
+                                <DeleteIcon />
+                            </Tooltip>
+                        </th>
+                        <th className="funcion">
+                            <Tooltip title= "Editar">
+                                <EditIcon />
+                            </Tooltip>
+	                    </th>
 	                </tr>
                 </thead>
 	            <tbody>
