@@ -150,9 +150,9 @@ function PersonaList(props) {
 	                <td id="emailPersona"><p>{persona.email}</p></td>
 	            	<td id="aliasPersona"><p>{persona.alias}</p></td>
                     <td id="idPersona"><p>{persona.id}</p></td>
-                    <td id="librosPrestados"><button onClick={handleLista} value= {persona.id}>O</button></td>
-	            	<td id="deleteBtt"><button onClick={handleDelete} value= {persona.id}>X</button></td>
-                    <td id="editarBtt"><button onClick={handleEditar} value= {persona.id}>E</button></td>
+                    <td id="librosPrestados"><button  className="funcionBtt" onClick={handleLista} value= {persona.id}>O</button></td>
+	            	<td id="deleteBtt"><button  className="funcionBtt" onClick={handleDelete} value= {persona.id}>X</button></td>
+                    <td id="editarBtt"><button  className="funcionBtt" onClick={handleEditar} value= {persona.id}>E</button></td>
 	            </tr>
             ))
             setPersonasHtml(personaAux);
