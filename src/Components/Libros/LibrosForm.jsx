@@ -25,28 +25,65 @@ function LibrosForm (props) {
 	}
 
 	const handleSubmit = (e) => {
-		e.preventDefault()
-		console.log(libro.persona_id);
+			e.preventDefault();
 
-		async function postLibros () { 
-				await axios({
-				    method: 'post',
-				    url: `//localhost:8000/libro`,
-				    data: libro,
-				    headers: {'Authorization': props.state.AuthReducer[0].token}
-				    })
-				.then((res) => {
-					alert.success(`Libro agregado`)
-					setNewPost(newPost + 1);
-					props.onSave(newPost);
+			async function verificarCategoria () {
+				await axios.get(`//localhost:8000/categoria/` + libro.categoria_id, {
+					headers: {
+						'Authorization': props.state.AuthReducer[0].token
+					}
 				})
-				.catch((error) => {
-				  console.error(error)
+				.then( (res) => {
+					console.log(res.data)
+					})
+				.catch( (error) => {
+				    alert.error('Esa categoria no existe');
 				});
 			}
-		postLibros ();
-		document.getElementById("Lregistro").reset();
-		document.getElementById("Tregistro").reset();
+
+			verificarCategoria ();
+
+
+			async function verificarPersona () {
+				await axios.get(`//localhost:8000/persona/` + libro.persona_id, {
+				  headers: {
+				    'Authorization': props.state.AuthReducer[0].token
+				  }
+				})
+
+					.then( (res) => {
+						console.log('Persona existente')
+						})
+					.catch( (error) => {
+					    alert.error('Ese ID de persona no existe');
+					});
+			}
+
+			if(libro.persona_id != null){
+				verificarPersona();
+			}
+
+
+			async function postLibros () { 
+					await axios({
+					    method: 'post',
+					    url: `//localhost:8000/libro`,
+					    data: libro,
+					    headers: {'Authorization': props.state.AuthReducer[0].token}
+					    })
+					.then((res) => {
+						alert.success(`Libro agregado`)
+						setNewPost(newPost + 1);
+						props.onSave(newPost);
+						document.getElementById("Lregistro").reset();
+						document.getElementById("Tregistro").reset();
+					})
+					.catch((error) => {
+					  console.error(error)
+					});
+				}
+			postLibros ();
+
 	}
 
 	return(
