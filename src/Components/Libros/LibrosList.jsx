@@ -57,20 +57,19 @@ function LibrosList (props) {
 
 	const handlePrestar = (e) =>{
 		e.preventDefault();
-		console.log(e.target.value)
 
 		const persona = prompt('INGRESA EL ID DE LA PERSONA:')
 
 		async function prestarLibro () {
 			await axios({
-				    method: 'put',
-				    url: `//localhost:8000/libro/prestar/` + e.target.value,
-				    headers: {'Authorization': props.state.AuthReducer[0].token},
-				    data: {
-				    	'id': e.target.value,
-				    	'persona_id': persona
-				    	}
-				    })
+			    method: 'put',
+			    url: `//localhost:8000/libro/prestar/` + e.target.value,
+			    headers: {'Authorization': props.state.AuthReducer[0].token},
+			    data: {
+			    	'id': e.target.value,
+			    	'persona_id': persona
+		    		}
+		    	})
 				.then((res) => {
 					alert.success(`El libro se a prestado a la persona ${persona}`)
 					setReload(reload + 1 )
@@ -79,10 +78,30 @@ function LibrosList (props) {
 				.catch((error) => {
 				  	console.error(error)
 				  	alert.error("La persona no existe o El libro ya esta prestado")
-				}
-		)}
-		prestarLibro ();
+				})
+		}
+
+		async function verificarPersona () {
+			await axios.get(`//localhost:8000/persona/` + persona, {
+			  headers: {
+			    'Authorization': props.state.AuthReducer[0].token
+			  }
+			})
+
+			.then( (res) => {
+				console.log('Persona existente')
+				prestarLibro ();
+				})
+
+				.catch( (error) => {
+				    alert.error('Ese ID de persona no existe');
+				});
+			}
+
+		verificarPersona ();			
+		
 	}
+	
 
 	const handleDevolver = (e) => {
 		e.preventDefault()
