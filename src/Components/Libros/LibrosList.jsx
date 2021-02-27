@@ -20,6 +20,7 @@ function LibrosList (props) {
 	const [libros, setLibros] = useState();
 	const [editar, setEditar] = useState();
 	const [libro, setLibro] = useState();
+	const [librosCategorias, setlibrosCategorias] = useState();
 	const [reload, setReload] = useState(0)
 
 	const handleDelete = (e) => {
@@ -140,7 +141,21 @@ function LibrosList (props) {
 				  console.error(error)
 				});
 			}
-		getLibros ();
+			async function getLibrosCategoria() { 
+				await axios.get(`//localhost:8000/categoria`, {
+					headers: {
+						'Authorization': props.state.AuthReducer[0].token
+					  }
+					})
+					.then((res) => {
+						setlibrosCategorias(res.data.respuesta)
+					})
+					.catch((error) => {
+					  console.error(error)
+					});		
+				}
+				getLibrosCategoria();
+				getLibros();
 		
 	}, [props.state.ChangeReducer, reload, editar])
 
@@ -150,7 +165,7 @@ function LibrosList (props) {
 	            <tr key={index}>
 	            	<td id="indexlibro"><p><strong>{index + 1}</strong></p></td> 
 	                <td id="nombrelibro"><p>{libro.nombre}</p></td>
-	                <td id="categorialibro"><p>{libro.categoria_id}</p></td>    
+					<td id="categorialibro"><p>{librosCategorias[librosCategorias.findIndex(x => x.id == libro.categoria_id)].nombre}</p></td>
 	                <td id="descripcionlibro"><p>{libro.descripcion}</p></td>
 	            	<td id="personalibro"><p>{libro.persona_id}</p></td>
 	            	<td id= "prestarbtt"><button className="funcionBtt" onClick={handlePrestar} value= {libro.id}>P</button></td>
@@ -224,4 +239,3 @@ const mapStateToProps = (state) =>{
 }
 
 export default connect(mapStateToProps, null)(LibrosList);
-
