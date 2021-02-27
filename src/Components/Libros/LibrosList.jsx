@@ -20,8 +20,6 @@ function LibrosList (props) {
 	const [libros, setLibros] = useState();
 	const [editar, setEditar] = useState();
 	const [libro, setLibro] = useState();
-	const [librosCategoria, setLibrosCategoria] = useState();
-	const [librosPersona, setLibrosPersona] = useState();
 	const [reload, setReload] = useState(0)
 
 	const handleDelete = (e) => {
@@ -137,95 +135,14 @@ function LibrosList (props) {
 				})
 				.then((res) => {
 				  setLibros(res.data.respuesta)
-				 
 				})
 				.catch((error) => {
 				  console.error(error)
 				});
 			}
-			async function getLibrosCategoria () { 
-			await axios.get(`//localhost:8000/categoria`, {
-				  headers: {
-				    'Authorization': props.state.AuthReducer[0].token
-				  }
-				})
-				.then((res) => {
-				  setLibrosCategoria(res.data.respuesta)
-				 
-				})
-				.catch((error) => {
-				  console.error(error)
-				});
-			}
-			async function getLibrosPersona () { 
-				await axios.get(`//localhost:8000/persona`, {
-					  headers: {
-						'Authorization': props.state.AuthReducer[0].token
-					  }
-					})
-					.then((res) => {
-					  setLibrosPersona(res.data.respuesta)
-					 
-					})
-					.catch((error) => {
-					  console.error(error)
-					});
-				}
-		getLibros();	
-		getLibrosCategoria();
-		getLibrosPersona();
+		getLibros ();
 		
 	}, [props.state.ChangeReducer, reload, editar])
-
-	
-	console.log(libros);
-
-	// useEffect(() => {	
-
-	// 	function auxCategoria (categoria_id) {
-	// 		if(librosCategoria != undefined){
-	// 			librosCategoria.forEach(categoria => {
-	// 				if(categoria_id == categoria.id){
-	// 					console.log("categoria.nombre:", categoria.nombre)
-	// 					return categoria.nombre
-	// 				}
-	// 			});
-	// 		}
-	// 	}
-	
-	// 	function auxPersona (persona_id) {
-	// 		if(librosPersona != undefined){
-	// 			librosPersona.forEach(persona => {
-	// 				// console.log("persona:", persona)
-	// 				if(persona_id == persona.id){
-	// 					console.log("persona.nombre:", persona.nombre)
-	// 					return JSON.stringify(persona.nombre)
-						
-	// 				}
-	// 			});
-				
-	// 		}	
-	// 	}
-
-	// 	if(libros != undefined){
-
-	// 		const libroCompleto = libros.map(libro => (	
-						
-	// 			{
-	// 				id: libro.id,
-	// 				nombre: libro.nombre,
-	// 				categoria: auxCategoria(libro.categoria_id),
-	// 				descripcion: libro.descripcion,
-	// 				persona: auxPersona(libro.persona_id)
-	// 			}
-	// 		));
-	// 		console.log(libroCompleto)
-	// 	}
-	// }, [libros])
-
-
-	
-	
 
 	useEffect(() => {
 		if(libros != undefined){
@@ -233,9 +150,9 @@ function LibrosList (props) {
 	            <tr key={index}>
 	            	<td id="indexlibro"><p><strong>{index + 1}</strong></p></td> 
 	                <td id="nombrelibro"><p>{libro.nombre}</p></td>
-	                <td id="categorialibro"><p>{libro.categoria_nombre}</p></td>    
+	                <td id="categorialibro"><p>{libro.categoria_id}</p></td>    
 	                <td id="descripcionlibro"><p>{libro.descripcion}</p></td>
-	            	<td id="personalibro"><p>{libro.alias}</p></td>
+	            	<td id="personalibro"><p>{libro.persona_id}</p></td>
 	            	<td id= "prestarbtt"><button className="funcionBtt" onClick={handlePrestar} value= {libro.id}>P</button></td>
 	            	<td id= "devolverbtt"><button className="funcionBtt" onClick={handleDevolver} value= {libro.id}>↕</button></td>
 	            	<td id= "borrarbtt"><button className="funcionBtt" onClick={handleDelete} value= {libro.id}>X</button></td>
@@ -246,9 +163,7 @@ function LibrosList (props) {
 			}
 	}, [libros])
 
-	
-		
-	
+
 		
 	return(
 		<div className='contentList'>
