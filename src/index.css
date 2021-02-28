@@ -21,6 +21,7 @@ background: linear-gradient(to bottom, #24243e, #302b63, #0f0c29); /* W3C, IE 10
     border-radius: 20px 20px 20px 20px;
     border: solid black 5px;
     float: right;
+    box-shadow: 0px 0px 20px 5px #EF47D5;
 }
 
 #header h1 {
@@ -73,6 +74,9 @@ code {
     flex-direction: row;
 }
 
+.butNav{
+    width: 150px;
+}
 
 #log {
     margin-top: 10px;
