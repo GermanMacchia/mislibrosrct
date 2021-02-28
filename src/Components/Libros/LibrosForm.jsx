@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { useAlert } from 'react-alert';
+import { Fab } from '@material-ui/core';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 
 function LibrosForm (props) {
@@ -103,7 +105,9 @@ function LibrosForm (props) {
 					<form id= "Tregistro">
 						<label className="descripcion" >Descripcion </label><br/>
 						<textarea type="textarea" name="descripcion" onChange={handleNuevoLibro} placeholder="Descripcion" /><br/><br/>
-						<input type= "submit" id='guardar_button' onClick= {handleSubmit} value= "Guardar" />
+						<Fab color="primary">
+							<AddCircleIcon fontSize="large" type= "submit" onClick={handleSubmit} />
+						</Fab>						
 					</form>
 				</div>
 			</div>

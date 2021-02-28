@@ -155,18 +155,9 @@ code {
     border-radius: 50%;
 }
 
-.funcionBtt:hover{
-    cursor: pointer;
-
-}
 
 #salir{
     color: #F33059;
-
-}
-
-#salir:hover{
-    color: #2FCA83;
 
 }
 
