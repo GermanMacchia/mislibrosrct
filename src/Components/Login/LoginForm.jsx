@@ -33,7 +33,8 @@ function LoginForm (props) {
 
 					if(res.data.token != null || undefined){
 						const token = res.data.token;
-						props.onSave({token});
+						props.onSave({token: token,
+									auth: true});
 						alert.success(`¡Bienvenido ${form.user}!`);
 						history.push('/home');
 					
