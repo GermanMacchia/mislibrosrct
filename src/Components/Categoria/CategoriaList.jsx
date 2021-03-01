@@ -101,7 +101,6 @@ function CategoriaList (props) {
                 listaAux.map((libro) => {alert.success(libro)})                  
             })
             .catch((error) => {
-                console.error(error)
                alert.show('Esta categoria no tiene libros asociados')
             });
         }

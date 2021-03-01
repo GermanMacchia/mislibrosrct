@@ -90,12 +90,12 @@ function LibrosForm (props) {
 			document.getElementById("Tregistro").reset();
 	};
 	
-	const opcion = categoria.map(categorias =>{
-		return <option value = {categorias.id} >{categorias.nombre}</option>		
+	const opcion = categoria.map((categorias, index) =>{
+		return <option key= {index} value = {categorias.id} >{categorias.nombre}</option>		
 	});
 
-	const opcionPersona = persona.map(personas =>{
-		return <option value = {personas.id} >{personas.nombre}</option>		
+	const opcionPersona = persona.map((personas, index) =>{
+		return <option key= {index} value = {personas.id} >{personas.nombre}</option>		
 	});
 
 	return  (
