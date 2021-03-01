@@ -12,51 +12,45 @@ function LibrosForm (props) {
 	const url = `//localhost:8000/`;
 	const header = {'Authorization': props.state.AuthReducer[0].token};
 
+
+	const [categoria, setCategoria] = useState([]);
+	const [persona, setPersona] = useState([])
 	const [newPost, setNewPost] = useState(0);
 	const [libro, setLibro] = useState({
 		    nombre: " ",
 		    descripcion: " ",
 		    categoria_id: " ",
 		    persona_id: null
-	})
+	});
 	
-	const [categoria, setCategoria] = useState([]);
-	const [persona, setPersona] = useState([])
+
+	useEffect(() => {
+
+		async function getCategorias() {
+	        await axios.get(url + `categoria`, {headers: header})
+	            .then((res) => {
+	                setCategoria(res.data.respuesta)
+	            })
+	            .catch((error) => {
+	                console.error(error)
+	            });
+	        };
+	    
+	    async function getPersonas() {
+	        await axios.get(url + `persona`, {headers: header})
+	            .then((res) => {
+	                setPersona(res.data.respuesta)
+	            })
+	            .catch((error) => {
+	                console.error(error)
+	            });
+	        };
 
 
-useEffect(() => {
-	async function getCategorias() {
-        await axios.get(`//localhost:8000/categoria`, {
-                headers: {
-                    'Authorization': props.state.AuthReducer[0].token
-                }
-            })
-            .then((res) => {
-                setCategoria(res.data.respuesta)
-            })
-            .catch((error) => {
-                console.error(error)
-            });
-        }
-    getCategorias();
+	    getCategorias();
+	    getPersonas();
 
-    async function getPersonas() {
-        await axios.get(`//localhost:8000/persona`, {
-                headers: {
-                    'Authorization': props.state.AuthReducer[0].token
-                }
-            })
-            .then((res) => {
-                setPersona(res.data.respuesta)
-            })
-            .catch((error) => {
-                console.error(error)
-            });
-        }
-    getPersonas();
-
-
-}, [])
+	}, []);
 
 
 	const handleNuevoLibro = (e) => {
@@ -65,42 +59,9 @@ useEffect(() => {
 			[e.target.name]: e.target.value
 			
 		});
-		console.log(libro);
-	}
+	};
 
-	
-useEffect(() => {
-	
-
-			async function verificarCategoria () {
-				await axios.get(url + 'categoria/' + libro.categoria_id, header)
-				.then( (res) => {
-					console.log('Categoria OK')
-					})
-				.catch( (error) => {
-				    alert.error('Esa categoria no existe');
-				});
-			}
-
-			verificarCategoria ();
-
-			
-			async function verificarPersona () {
-				await axios.get(url + 'persona/' + libro.persona_id, header)
-					.then( (res) => {
-						console.log('Persona OK')
-						})
-					.catch( (error) => {
-					    alert.error('Ese ID de persona no existe');
-					});
-			}
-			
-				verificarPersona();
-
-			}, [props])
-
-			
-			
+				
 	const handleSubmit = (e) => {
 			e.preventDefault();	
 
@@ -117,39 +78,34 @@ useEffect(() => {
 						props.onSave(newPost);
 						document.getElementById("Lregistro").reset();
 						document.getElementById("Tregistro").reset();
-					})
+					});
 					.catch((error) => {
 					  console.error(error)
 					  alert.error("Debes completar todos los campos");
 					});
-				}
+				};
+
 			postLibros ();
 			document.getElementById("Lregistro").reset();
 			document.getElementById("Tregistro").reset();
-			setLibro({
-				nombre: " ",
-		    	descripcion: " ",
-		    	categoria_id: " ",
-		    	persona_id: null
-			})
-	}
+	};
 	
 	const opcion = categoria.map(categorias =>{
 		return <option value = {categorias.id} >{categorias.nombre}</option>		
-	})
+	});
 
 	const opcionPersona = persona.map(personas =>{
 		return <option value = {personas.id} >{personas.nombre}</option>		
-	})
+	});
 
-	return(
+	return  (
 			<div className= "homeform">
 				<h2>Ingresar un libro</h2>
 				<div className="floatLeft">
 					<form id="Lregistro">
 						<label>Nombre </label><br/>
 						<input type="text" name="nombre" onChange={handleNuevoLibro} placeholder="Nombre del libro" /><br/>
-						
+
 						<label>Categoria </label><br/>
 						<select name="categoria_id" id="categoria" onChange={handleNuevoLibro} >
 						<option value="">Seleccionar:</option>
@@ -173,16 +129,16 @@ useEffect(() => {
 					</form>
 				</div>
 			</div>
-		)
+		);
 
 }
 
 const mapStateToProps = (state) =>{
 	return {state}
-}
+};
 const mapActionsToProps = (dispatch) => {
 	return {onSave: (newPost) => dispatch({type:'CHANGE', data: newPost})}
-}
+};
 
 export default connect(mapStateToProps, mapActionsToProps)(LibrosForm);
 
