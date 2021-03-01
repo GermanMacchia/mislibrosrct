@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAlert } from 'react-alert';
 import { connect } from 'react-redux';
+import { Fab } from '@material-ui/core';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 function PersonaForm (props) {
 
@@ -58,7 +60,9 @@ function PersonaForm (props) {
 						<input type="email" name="email" onChange={handleNuevaPersona} placeholder="Email"/><br/>
 						<label>Alias</label><br/>
 						<input type="text" name="alias" onChange={handleNuevaPersona} placeholder="Prestado a..."/><br/><br/>
-						<input type= "submit" id='guardar_button' onClick= {handleSubmit} value= "Guardar" />
+						<Fab color="primary">
+							<AddCircleIcon fontSize="large" type= "submit" onClick={handleSubmit} />
+						</Fab>	
 					</form>
 			</div>
 		)

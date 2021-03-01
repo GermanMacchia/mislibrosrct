@@ -2,11 +2,15 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { useAlert } from 'react-alert';
+import { Fab } from '@material-ui/core';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 
 function LibrosForm (props) {
 
 	const alert = useAlert();
+	const url = `//localhost:8000/`;
+	const header = {headers: {'Authorization': props.state.AuthReducer[0].token}};
 
 	const [newPost, setNewPost] = useState(0);
 	const [libro, setLibro] = useState({
@@ -34,14 +38,9 @@ useEffect(() => {
 	
 
 			async function verificarCategoria () {
-				await axios.get(`//localhost:8000/categoria/`, {
-					headers: {
-						'Authorization': props.state.AuthReducer[0].token
-					}
-				})
+				await axios.get(url + 'categoria/' + libro.categoria_id, header)
 				.then( (res) => {
-					setCategoria(res.data.respuesta)
-					console.log(res.data.respuesta)
+					console.log('Categoria OK')
 					})
 				.catch( (error) => {
 				    alert.error('Esa categoria no existe');
@@ -52,15 +51,9 @@ useEffect(() => {
 
 			
 			async function verificarPersona () {
-				await axios.get(`//localhost:8000/persona/`, {
-				  headers: {
-				    'Authorization': props.state.AuthReducer[0].token
-				  }
-				})
-
+				await axios.get(url + 'persona/' + libro.persona_id, header)
 					.then( (res) => {
-						setPersona(res.data.respuesta);
-						console.log(res.data.respuesta)
+						console.log('Persona OK')
 						})
 					.catch( (error) => {
 					    alert.error('Ese ID de persona no existe');
@@ -79,10 +72,10 @@ useEffect(() => {
 			async function postLibros () { 
 					await axios({
 					    method: 'post',
-					    url: `//localhost:8000/libro`,
+					    url: url + 'libro',
 					    data: libro,
-					    headers: {'Authorization': props.state.AuthReducer[0].token}
-					    })
+					    headers: header.headers
+					})
 					.then((res) => {
 						alert.success(`Libro agregado`)
 						setNewPost(newPost + 1);
@@ -139,7 +132,9 @@ useEffect(() => {
 					<form id= "Tregistro">
 						<label className="descripcion" >Descripcion </label><br/>
 						<textarea type="textarea" name="descripcion" onChange={handleNuevoLibro} placeholder="Descripcion" /><br/><br/>
-						<input type= "submit" id='guardar_button' onClick= {handleSubmit} value= "Guardar" />
+						<Fab color="primary">
+							<AddCircleIcon fontSize="large" type= "submit" onClick={handleSubmit} />
+						</Fab>						
 					</form>
 				</div>
 			</div>

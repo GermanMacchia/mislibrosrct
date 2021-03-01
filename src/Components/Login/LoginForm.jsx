@@ -3,8 +3,9 @@ import { connect } from 'react-redux';
 import { useHistory } from "react-router-dom";
 import { useAlert } from 'react-alert';
 import axios from 'axios';
-import Home from '../Home/Home'
-
+import Home from '../Home/Home';
+import { Fab } from '@material-ui/core';
+import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 
 function LoginForm (props) {
 
@@ -32,7 +33,8 @@ function LoginForm (props) {
 
 					if(res.data.token != null || undefined){
 						const token = res.data.token;
-						props.onSave({token});
+						props.onSave({token: token,
+									auth: true});
 						alert.success(`¡Bienvenido ${form.user}!`);
 						history.push('/home');
 					
@@ -56,7 +58,9 @@ function LoginForm (props) {
 				<input type="text" name='user' placeholder="Usuario" onChange={handleForm} /><br/>
 				<label>Pass </label>
 				<input type="password" name='pass'placeholder="Contraseña" onChange={handleForm}/><br/><br/>
-				<input className="button" type= "submit" onClick={handleSubmit} value= "Ingresa" />
+				<Fab color="primary">
+					<PowerSettingsNewIcon fontSize="large" type= "submit" onClick={handleSubmit} />
+				</Fab>	
 			</form>
 		</div>
 	);

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useAlert } from 'react-alert';
+import { Fab } from '@material-ui/core';
+import AssignmentIcon from '@material-ui/icons/Assignment';
 
 export default function Registro () {
 	
@@ -51,7 +53,9 @@ export default function Registro () {
 					<input type="email" name="email" onChange= {handleChange} placeholder="Ingrese un email" /><br/>
 					<label>Celu </label>
 					<input type="text" name="celu" onChange= {handleChange} placeholder="Nro. de contacto"/><br/><br/>
-					<input className="button" onClick= {handleSubmit} type= "submit" value= "Registrate" />
+					<Fab color="primary">
+						<AssignmentIcon fontSize="large" type= "submit" onClick={handleSubmit} />
+					</Fab>
 				</form>
 			</div>
 		);
