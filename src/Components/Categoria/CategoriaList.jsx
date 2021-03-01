@@ -174,8 +174,7 @@ function CategoriaList (props) {
 	            </tbody>
 	        </table>
             <div className="modal">
-				{editar}
-                {verLibros}
+				{editar}               
 			</div>
             <div className="modalVerLibros">			
                 {verLibros}

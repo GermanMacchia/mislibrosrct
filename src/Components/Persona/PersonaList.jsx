@@ -3,6 +3,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { useAlert } from 'react-alert';
 import EditarPersona from './EditarPersona'
+import VerLibros from './VerLibros';
 
 
 import Tooltip from '@material-ui/core/Tooltip';
@@ -24,7 +25,7 @@ function PersonaList(props) {
     const [personas, setPersonas] = useState();
     const [reload, setReload] = useState(0);
     const [editar, setEditar] = useState();
-
+    const [verLibros, setVerLibros] = useState("");
 
 
 
@@ -88,34 +89,19 @@ function PersonaList(props) {
 	}
       
       
-   
+    // Ver Libros Prestados
   
-    const handleLista = (e) => {
-            e.preventDefault()
+    const handleVerLibros = (e) => {
+        e.preventDefault();
 
-            async function getLibrosPrestados (id){
-                await axios.get(`//localhost:8000/persona/libro/` + id, {
-                    headers: {
-                        'Authorization': props.state.AuthReducer[0].token
-                    }
-                })
-                .then((res) => {
-                    const lista = res.data.respuesta;
-                    const listaAux = lista.map((libro, index)=>(
-                            ` ${index + 1} ${JSON.stringify(libro.nombre)}`
-                        ))
-                listaAux.map((libro) => {alert.success(libro)})
-                                       
-                })
-                .catch((error) => {
-                    console.error(error)
-                   alert.show('No tiene libros prestados')
-                });
-            }
-
-            getLibrosPrestados(e.target.value)
-
+        const verLibros = e => {
+            setVerLibros(<VerLibros id={e.target.value} />);
+        }
+        verLibros(e);
+        const modal = document.querySelector(".modalVerLibros");
+		modal.style = "opacity: 1;";
     }
+
 
 
     useEffect(() => {
@@ -150,7 +136,7 @@ function PersonaList(props) {
 	                <td id="emailPersona"><p>{persona.email}</p></td>
 	            	<td id="aliasPersona"><p>{persona.alias}</p></td>
                     <td id="idPersona"><p>{persona.id}</p></td>
-                    <td id="librosPrestados"><button  className="funcionBtt" onClick={handleLista} value= {persona.id}>O</button></td>
+                    <td id="librosPrestados"><button  className="funcionBtt" onClick={handleVerLibros} value= {persona.id}>O</button></td>
 	            	<td id="deleteBtt"><button  className="funcionBtt" onClick={handleDelete} value= {persona.id}>X</button></td>
                     <td id="editarBtt"><button  className="funcionBtt" onClick={handleEditar} value= {persona.id}>E</button></td>
 	            </tr>
@@ -215,7 +201,12 @@ function PersonaList(props) {
 	                {personasHtml}
 	            </tbody>
 	        </table>
-            {editar}
+            <div className="modal">
+				{editar}               
+			</div>
+            <div className="modalVerLibros">			
+                {verLibros}
+			</div>
 		</div>
     );
 }

@@ -69,7 +69,7 @@ useEffect(() => {
 			
 				verificarPersona();
 
-			}, [props])
+}, [props])
 
 			
 			
