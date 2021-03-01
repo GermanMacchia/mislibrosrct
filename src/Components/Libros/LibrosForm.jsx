@@ -18,18 +18,24 @@ function LibrosForm (props) {
 		    descripcion: " ",
 		    categoria_id: " ",
 		    persona_id: null
-			})
+	})
+	
+	const [categoria, setCategoria] = useState([]);
+	const [persona, setPersona] = useState([])
 
 
 	const handleNuevoLibro = (e) => {
 		setLibro({
 			...libro,
 			[e.target.name]: e.target.value
+			
 		});
+		console.log(libro);
 	}
 
-	const handleSubmit = (e) => {
-			e.preventDefault();
+	
+useEffect(() => {
+	
 
 			async function verificarCategoria () {
 				await axios.get(url + 'categoria/' + libro.categoria_id, header)
@@ -43,7 +49,7 @@ function LibrosForm (props) {
 
 			verificarCategoria ();
 
-
+			
 			async function verificarPersona () {
 				await axios.get(url + 'persona/' + libro.persona_id, header)
 					.then( (res) => {
@@ -53,11 +59,15 @@ function LibrosForm (props) {
 					    alert.error('Ese ID de persona no existe');
 					});
 			}
-
-			if(libro.persona_id != null){
+			
 				verificarPersona();
-			}
 
+			}, [props])
+
+			
+			
+	const handleSubmit = (e) => {
+			e.preventDefault();	
 
 			async function postLibros () { 
 					await axios({
@@ -75,11 +85,27 @@ function LibrosForm (props) {
 					})
 					.catch((error) => {
 					  console.error(error)
+					  alert.error("Debes completar todos los campos");
 					});
 				}
 			postLibros ();
-
+			document.getElementById("Lregistro").reset();
+			document.getElementById("Tregistro").reset();
+			setLibro({
+				nombre: " ",
+		    	descripcion: " ",
+		    	categoria_id: " ",
+		    	persona_id: null
+			})
 	}
+	
+	const opcion = categoria.map(categorias =>{
+		return <option value = {categorias.id} >{categorias.nombre}</option>		
+	})
+
+	const opcionPersona = persona.map(personas =>{
+		return <option value = {personas.id} >{personas.nombre}</option>		
+	})
 
 	return(
 			<div className= "homeform">
@@ -88,10 +114,18 @@ function LibrosForm (props) {
 					<form id="Lregistro">
 						<label>Nombre </label><br/>
 						<input type="text" name="nombre" onChange={handleNuevoLibro} placeholder="Nombre del libro" /><br/>
+						
 						<label>Categoria </label><br/>
-						<input type="text" name="categoria_id" onChange={handleNuevoLibro} placeholder="Categoria" /><br/>
+						<select name="categoria_id" id="categoria" onChange={handleNuevoLibro} >
+						<option value="">Seleccionar:</option>
+							{opcion}	
+						</select>
+
 						<label>Persona</label><br/>
-						<input type="text" name="persona_id" onChange={handleNuevoLibro} placeholder="Prestado a..."/><br/>
+						<select name="persona_id" id="persona" onChange={handleNuevoLibro} >
+						<option value="">Seleccionar:</option>
+							{opcionPersona}	
+						</select><br/>
 					</form>
 				</div>
 				<div className="bigtext">

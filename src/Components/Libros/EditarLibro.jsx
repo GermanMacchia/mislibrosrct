@@ -16,7 +16,7 @@ function EditarLibro (props) {
 		persona_id: ""
 		});
 
-	
+		
     useEffect(() => {
 		
 		async function getLibros () { 
@@ -37,8 +37,6 @@ function EditarLibro (props) {
 		getLibros ();
 
 
-		const modal = document.querySelector(".modal");
-		modal.style = "opacity: 1;";
     }, [props.id])
 	
 	
@@ -88,7 +86,7 @@ function EditarLibro (props) {
 	}, [editado])
 	
 	return(		
-			<div className = "homeform modal">
+			<div className = "homeform">
 				<a href="#" onClick={cerrarModal}>X</a>
 				<h2>Editar libro</h2>
 				<div className="floatLeft">
