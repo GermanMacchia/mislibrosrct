@@ -18,14 +18,12 @@ import AutorenewIcon from '@material-ui/icons/Autorenew';
 
 function PersonaList(props) {
 
-    const alert = useAlert()
+    const alert = useAlert();
 
     const [personasHtml, setPersonasHtml] = useState();
     const [personas, setPersonas] = useState();
     const [reload, setReload] = useState(0);
     const [editar, setEditar] = useState();
-
-
 
 
     const handleReset = (e) => {
@@ -39,15 +37,15 @@ function PersonaList(props) {
             })
             .then((res) => {
                 setReload(reload + 1);
-                alert.success('Se han reseteado los parametros')
+                alert.success('Se han reseteado los parametros');
             })
             .catch((error) => {
-                console.error(error)
+                console.error(error);
             });
-        }
+        };
 
         resetPersona();
-    } 
+    };
 
     const handleDelete = (e) => {
         e.preventDefault()

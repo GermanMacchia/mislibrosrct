@@ -78,7 +78,7 @@ function LibrosForm (props) {
 						props.onSave(newPost);
 						document.getElementById("Lregistro").reset();
 						document.getElementById("Tregistro").reset();
-					});
+					})
 					.catch((error) => {
 					  console.error(error)
 					  alert.error("Debes completar todos los campos");
