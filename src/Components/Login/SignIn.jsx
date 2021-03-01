@@ -7,10 +7,14 @@ export default function SignIn () {
 
 	return(
 		<>
+		<div className="login">
 			<div id="log">
 				<LoginForm />
+			</div>
+			<div id="reg">
 				<Registro />
 			</div>
+		</div>			
 		</>
 	);
 }

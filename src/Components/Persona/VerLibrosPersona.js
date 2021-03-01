@@ -3,7 +3,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 
 
-function VerLibros (props) {
+function VerLibrosPersona (props) {
 	
 	
 	const [libros, setLibros] = useState([]);	
@@ -36,7 +36,7 @@ function VerLibros (props) {
 		
 	return(		
 			<div id="Plibros" className = "homeform">
-				<a href="#" onClick={cerrarModal}>X</a>
+				<a href="#" onClick={cerrarModalVerLibros}>X</a>
 				<h2>Libros Prestados</h2>
                 
                 {libros.filter(libro => libro.persona_id == props.id).map(libro => {
@@ -51,10 +51,10 @@ function VerLibros (props) {
 
 	
     }
-
-	function cerrarModal(){
-		const modal = document.querySelector(".modalVerLibros");
-		modal.style = "opacity: 0;";		
+	
+	function cerrarModalVerLibros(){
+		const modalVerLibros = document.querySelector(".modalVerLibros");
+		modalVerLibros.style = "display: none;";	
 	}
 
 
@@ -65,4 +65,4 @@ function VerLibros (props) {
 		return {onSave: (newPost) => dispatch({type:'CHANGE', data: newPost})}
 	}
 	
-	export default connect(mapStateToProps, mapActionsToProps)(VerLibros);
+	export default connect(mapStateToProps, mapActionsToProps)(VerLibrosPersona);

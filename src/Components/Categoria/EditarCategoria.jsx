@@ -33,10 +33,10 @@ function EditarCategoria (props) {
 
 				
 			}
-			
+			document.getElementById("Cregistro").reset();	
 		getCategorias ();
 
-		document.querySelector("#Cregistro").reset();
+		
     }, [props.id])
 	
 	
@@ -63,6 +63,7 @@ function EditarCategoria (props) {
 					alert.success(`Categoria Editada`)
 					setNewPost(newPost + 1);
 					props.onSave(newPost);
+					document.getElementById("Cregistro").reset();
 					cerrarModal();
 				})
 				.catch((error) => {
@@ -72,7 +73,7 @@ function EditarCategoria (props) {
 		}
 		putCategorias ();
 		const modal = document.querySelector(".modal");
-		modal.style = "opacity: 0;";
+		modal.style = "display: none;";
 	}
 	
 	useEffect(() => {
@@ -103,7 +104,9 @@ function EditarCategoria (props) {
 
 	function cerrarModal(){
 		const modal = document.querySelector(".modal");
-		modal.style = "opacity: 0;";		
+		modal.style = "display: none;";	
+		document.getElementById("Cregistro").reset();	
+		
 	}
 
 

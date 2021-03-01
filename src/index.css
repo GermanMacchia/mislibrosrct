@@ -35,7 +35,6 @@ body {
 h2 {
     font-family: lobster;
     color: #9EF1EE;
-    font-size:
 }
 
 ul {
@@ -82,26 +81,92 @@ select {
     flex-direction: row;
 }
 
+.login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 #log {
     margin-top: 10px;
     display: flex;
-    flex-direction: inline;
     text-align: center;
+    width: 100%;
+    height: fit-content;
+    padding: 210px;
 }
 
-.Logform {
-    width: 50%;
+#reg {
+    margin-top: 10px;
+    display: none;
+    text-align: center;
+    width: 100%;
+    height: fit-content;
+    padding: 200px;
+}
+
+.Logform,
+.Regform {
+    width: 80%;
     border: solid #EBA9F1 3px;
-    height: 300px;
+    height: fit-content;
     border-radius: 20px 20px 20px 20px;
+    padding: 40px;
+    margin-left: 60px;
 }
 
-#log label {
+.Logform a,
+.Regform a {
+    display: block;
+    text-decoration: none;
+    color: white;
+    font-size: 1rem;
+    margin-top: 10px;
+    transition: all 0.5s ease-in-out;
+}
+
+.Logform a:hover,
+.Regform a:hover {
+    color: #EBA9F1;
+    transform: scale(1.1);
+}
+
+@media (min-width: 780px) {
+    #log {
+        margin-top: 10px;
+        display: flex;
+        text-align: center;
+        width: 50%;
+        height: fit-content;
+        padding: 210px;
+    }
+    #reg {
+        margin-top: 10px;
+        display: none;
+        text-align: center;
+        width: 50%;
+        height: fit-content;
+        padding: 200px;
+    }
+    .Logform,
+    .Regform {
+        width: 50%;
+        border: solid #EBA9F1 3px;
+        height: fit-content;
+        border-radius: 20px 20px 20px 20px;
+        padding: 30px;
+        margin-left: 60px;
+    }
+}
+
+#log label,
+#reg label {
     color: #D6E4E5;
     font-size: 25px
 }
 
-#log h2 {
+#log h2,
+#reg h2 {
     color: #22BAD1;
 }
 
@@ -313,6 +378,7 @@ table p {
 }
 
 .modal {
+    display: none;
     position: fixed;
     top: 20%;
     left: 20%;
@@ -323,7 +389,6 @@ table p {
     z-index: 10;
     padding: 1rem;
     box-shadow: 0 10px 25px black;
-    opacity: 0;
 }
 
 .modal a {
@@ -336,6 +401,7 @@ table p {
 }
 
 .modalVerLibros {
+    display: none;
     position: fixed;
     top: 20%;
     left: 20%;
@@ -346,7 +412,6 @@ table p {
     z-index: 10;
     padding: 1rem;
     box-shadow: 0 10px 25px black;
-    opacity: 0;
 }
 
 .modalVerLibros a {
@@ -356,12 +421,4 @@ table p {
     text-decoration: none;
     color: white;
     font-size: 1.5rem;
-}
-
-.opacidad {
-    opacity: 1;
-}
-
-.opacidad0 {
-    opacity: 0;
 }

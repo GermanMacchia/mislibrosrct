@@ -3,7 +3,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { useAlert } from 'react-alert';
 import EditarPersona from './EditarPersona'
-import VerLibros from './VerLibros';
+import VerLibrosPersona from './VerLibrosPersona';
 
 
 import Tooltip from '@material-ui/core/Tooltip';
@@ -85,7 +85,10 @@ function PersonaList(props) {
 				setEditar(<EditarPersona id={e.target.value} />);
 			}
 		editarPersona(e);
-                
+        const modal = document.querySelector(".modal");
+		modal.style = "display: block;"; 
+        const modalVerLibros = document.querySelector(".modalVerLibros");
+		modalVerLibros.style = "display: none;";    
 	}
       
       
@@ -95,11 +98,13 @@ function PersonaList(props) {
         e.preventDefault();
 
         const verLibros = e => {
-            setVerLibros(<VerLibros id={e.target.value} />);
+            setVerLibros(<VerLibrosPersona id={e.target.value} />);
         }
         verLibros(e);
-        const modal = document.querySelector(".modalVerLibros");
-		modal.style = "opacity: 1;";
+        const modalVerLibros = document.querySelector(".modalVerLibros");
+		modalVerLibros.style = "display: block;";
+        const modal = document.querySelector(".modal");
+		modal.style = "display: none;"; 
     }
 
 

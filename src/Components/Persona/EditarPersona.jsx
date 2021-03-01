@@ -40,12 +40,8 @@ function EditarPersona (props) {
 			
 		getPersonas ();
 
-		document.querySelector("#registro").reset();
+		document.querySelector("#Pregistro").reset();
 		
-		const modal = document.querySelector(".modal");
-		modal.classList.remove("opacidad0");
-		modal.classList.add("opacidad");
-
     }, [props.id])
 	
 	
@@ -80,8 +76,7 @@ function EditarPersona (props) {
 		}
 		putPersonas ();
 		const modal = document.querySelector(".modal");
-		modal.classList.remove("opacidad");
-		modal.classList.add("opacidad0");
+		modal.style = "display: none;";
 	}
 	
 	useEffect(() => {
@@ -98,11 +93,16 @@ function EditarPersona (props) {
 	
 	}, [editado])
 	
+	function cerrarModal(){
+		const modal = document.querySelector(".modal");
+		modal.style = "display: none;";		
+	}
+
 	return(		
-			<div className = "homeform modal">
+			<div className = "homeform">
 				<a href="#" onClick={cerrarModal}>X</a>
-				<h2>Ingresar una Persona</h2>
-					<form id="registro">
+				<h2>Editar Persona</h2>
+					<form id="Pregistro">
 						<label>Nombre </label><br/>
 						<input type="text" name="nombre" onChange={handleEditarPersona} placeholder={editado.nombre} /><br/>
 						<label>Apellido</label><br/>
@@ -118,14 +118,6 @@ function EditarPersona (props) {
 
 	
     }
-
-	function cerrarModal(){
-		const modal = document.querySelector(".modal");
-		modal.classList.remove("opacidad");
-		modal.classList.add("opacidad0");
-		
-	}
-
 
 	const mapStateToProps = (state) =>{
 		return {state}

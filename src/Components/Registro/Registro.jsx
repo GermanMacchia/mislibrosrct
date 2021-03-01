@@ -36,11 +36,21 @@ export default function Registro () {
         }
         registro();
         document.getElementById("registro").reset()
+		const log = document.querySelector("#log");
+		log.style = "display: block;";
+        const reg = document.querySelector("#reg");
+		reg.style = "display: none;"; 
 	}
 
+	const irLogin = ()=>{
+		const log = document.querySelector("#log");
+		log.style = "display: block;";
+        const reg = document.querySelector("#reg");
+		reg.style = "display: none;"; 
+	}
 
 	return(
-			<div className= "Logform">
+			<div className= "Regform">
 				<h2>Registrate</h2>
 				<form id="registro">
 					<label>User </label>
@@ -53,6 +63,7 @@ export default function Registro () {
 					<input type="text" name="celu" onChange= {handleChange} placeholder="Nro. de contacto"/><br/><br/>
 					<input className="button" onClick= {handleSubmit} type= "submit" value= "Registrate" />
 				</form>
+				<a href="#/" onClick={irLogin}>Login</a>
 			</div>
 		);
 }

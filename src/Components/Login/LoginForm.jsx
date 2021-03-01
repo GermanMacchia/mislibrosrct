@@ -48,6 +48,13 @@ function LoginForm (props) {
 		postLogin();
 	}
 
+	const irReg = ()=>{		
+        const reg = document.querySelector("#reg");
+		reg.style = "display: block;"; 
+		const log = document.querySelector("#log");
+		log.style = "display: none;";
+	}
+
 	return(
 		<div className= "Logform">
 			<h2>Ingresa a tu biblioteca</h2>
@@ -58,6 +65,7 @@ function LoginForm (props) {
 				<input type="password" name='pass'placeholder="Contraseña" onChange={handleForm}/><br/><br/>
 				<input className="button" type= "submit" onClick={handleSubmit} value= "Ingresa" />
 			</form>
+			<a href="#/" onClick={irReg}>Registrate</a>
 		</div>
 	);
 

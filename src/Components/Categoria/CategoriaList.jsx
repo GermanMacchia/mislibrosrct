@@ -77,7 +77,9 @@ function CategoriaList (props) {
 			}
 		editarCategoria(e);
         const modal = document.querySelector(".modal");
-		modal.style = "opacity: 1;";
+		modal.style = "display: block;"; 
+        const modalVerLibros = document.querySelector(".modalVerLibros");
+		modalVerLibros.style = "display: none;";    
                 
 	}
 
@@ -88,8 +90,10 @@ function CategoriaList (props) {
             setVerLibros(<VerLibros id={e.target.value} />);
         }
         verLibros(e);
-        const modal = document.querySelector(".modalVerLibros");
-		modal.style = "opacity: 1;";
+        const modalVerLibros = document.querySelector(".modalVerLibros");
+		modalVerLibros.style = "display: block;";
+        const modal = document.querySelector(".modal");
+		modal.style = "display: none;";
     }
 
 

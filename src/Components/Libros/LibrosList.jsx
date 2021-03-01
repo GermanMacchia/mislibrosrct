@@ -55,7 +55,7 @@ function LibrosList (props) {
 		editarLibro(e);
 		
 		const modal = document.querySelector(".modal");
-		modal.style = "opacity: 1;";
+		modal.style = "display: block;"; 
 	}
 
 	const handlePrestar = (e) =>{

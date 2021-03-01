@@ -114,7 +114,7 @@ function EditarLibro (props) {
 
 	function cerrarModal(){
 		const modal = document.querySelector(".modal");
-		modal.style = "opacity: 0;";
+		modal.style = "display: none;"; 
 	}
 
 

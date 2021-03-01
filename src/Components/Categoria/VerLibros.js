@@ -36,7 +36,7 @@ function VerLibros (props) {
 		
 	return(		
 			<div id="Clibros" className = "homeform">
-				<a href="#" onClick={cerrarModal}>X</a>
+				<a href="#" onClick={cerrarModalVerLibros}>X</a>
 				<h2>Libros de la categoria</h2>
                 
                 {libros.filter(libro => libro.categoria_id == props.id).map(libro => {
@@ -51,10 +51,10 @@ function VerLibros (props) {
 
 	
     }
-
-	function cerrarModal(){
-		const modal = document.querySelector(".modalVerLibros");
-		modal.style = "opacity: 0;";		
+	
+	function cerrarModalVerLibros(){
+		const modalVerLibros = document.querySelector(".modalVerLibros");
+		modalVerLibros.style = "display: none;";		
 	}
 
 
