@@ -8,7 +8,6 @@ export default function Registro () {
 	
 	const alert = useAlert()
 	const url = `//localhost:8000/`;
-	const header = {'Authorization': props.state.AuthReducer[0].token};
 
 	const [user, setUser] = useState({
 		usuario: " ",
