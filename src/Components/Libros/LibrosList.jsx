@@ -3,6 +3,7 @@ import axios from 'axios';
 import EditarLibro from './EditarLibro'
 import { connect } from 'react-redux';
 import { useAlert } from 'react-alert';
+
 import Tooltip from '@material-ui/core/Tooltip';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
@@ -15,6 +16,8 @@ import FormatList from '@material-ui/icons/FormatListNumbered';
 function LibrosList (props) {
 
 	const alert = useAlert();
+	const url = `//localhost:8000/`;
+	const header = {'Authorization': props.state.AuthReducer[0].token};
 
 	const [librosHtml, setLibrosHtml] = useState();
 	const [libros, setLibros] = useState();
@@ -22,16 +25,17 @@ function LibrosList (props) {
 	const [libro, setLibro] = useState();
 	const [reload, setReload] = useState(0)
 
+
 	const handleDelete = (e) => {
-		e.preventDefault()
+		e.preventDefault();
 
 			async function deleteLibro () {
 				const opcion = window.confirm('¿Seguro que quieres eliminar?')
 				if(opcion == true){
 					await axios({
 					    method: 'delete',
-					    url: `//localhost:8000/libro/` + e.target.value,
-					    headers: {'Authorization': props.state.AuthReducer[0].token},
+					    url: url + `libro/` + e.target.value,
+					    headers: header,
 					    })
 					.then((res) => {
 						alert.success('Se ha borrado correctamente')
@@ -43,17 +47,19 @@ function LibrosList (props) {
 					});
 				}
 			}
+
 		deleteLibro ();
 	}
 
+
 	const handleEditar = (e) => {
-		e.preventDefault()
+		e.preventDefault();
 		
 			async function editarLibro (e) {
 				setEditar(<EditarLibro id={e.target.value} />);
 			}
+
 		editarLibro(e);
-		
 		const modal = document.querySelector(".modal");
 		modal.style = "opacity: 1;";
 	}
@@ -61,13 +67,13 @@ function LibrosList (props) {
 	const handlePrestar = (e) =>{
 		e.preventDefault();
 
-		const persona = prompt('INGRESA EL ID DE LA PERSONA:')
+		const persona = prompt('INGRESA EL ID DE LA PERSONA:');
 
 		async function prestarLibro () {
 			await axios({
 			    method: 'put',
-			    url: `//localhost:8000/libro/prestar/` + e.target.value,
-			    headers: {'Authorization': props.state.AuthReducer[0].token},
+			    url: url + `libro/prestar/` + e.target.value,
+			    headers: header,
 			    data: {
 			    	'id': e.target.value,
 			    	'persona_id': persona
@@ -85,17 +91,12 @@ function LibrosList (props) {
 		}
 
 		async function verificarPersona () {
-			await axios.get(`//localhost:8000/persona/` + persona, {
-			  headers: {
-			    'Authorization': props.state.AuthReducer[0].token
-			  }
-			})
-
+			await axios.get(url + `persona/` + persona, {headers: header}
+				)
 			.then( (res) => {
 				console.log('Persona existente')
 				prestarLibro ();
 				})
-
 				.catch( (error) => {
 				    alert.error('Ese ID de persona no existe');
 				});
@@ -107,35 +108,33 @@ function LibrosList (props) {
 	
 
 	const handleDevolver = (e) => {
-		e.preventDefault()
+		e.preventDefault();
 
 		async function devolverLibro () {
 				await axios({
 				    method: 'put',
-				    url: `//localhost:8000/libro/devolver/` + e.target.value,
-				    headers: {'Authorization': props.state.AuthReducer[0].token}
+				    url: url + `libro/devolver/` + e.target.value,
+				    headers: header
 				    })
 				.then((res) => {
 					alert.success("El libro a vuelto a tu bibiblioteca")
 					setReload(reload + 1 )
-
 				})
 				.catch((error) => {
 				  	console.error(error)
 				  	alert.show("El libro no esta prestado")
 				}
 		)}
+
 		devolverLibro();
 	}
 
 
 	useEffect(() => {
+
 		async function getLibros () { 
-			await axios.get(`//localhost:8000/libro`, {
-				  headers: {
-				    'Authorization': props.state.AuthReducer[0].token
-				  }
-				})
+			await axios.get(url + `libro`, {headers: header}
+				)
 				.then((res) => {
 				  setLibros(res.data.respuesta)
 				})
@@ -143,12 +142,16 @@ function LibrosList (props) {
 				  console.error(error)
 				});
 			}
+
 		getLibros ();
 		
 	}, [props.state.ChangeReducer, reload, editar])
 
+
 	useEffect(() => {
+
 		if(libros != undefined){
+
 	        const librosAux = libros.map((libro, index) => (
 	            <tr key={index}>
 	            	<td id="indexlibro"><p><strong>{index + 1}</strong></p></td> 
@@ -162,12 +165,13 @@ function LibrosList (props) {
 					<td id= "editarbtt"><button  className="funcionBtt" onClick={handleEditar} value= {libro.id}>E</button></td>
 	            </tr>
 	        ))
+
 			setLibrosHtml(librosAux);
-			}
+		}
+
 	}, [libros])
 
 
-		
 	return(
 		<div className='contentList'>
 			<h2>Tu Bibiblioteca</h2>
