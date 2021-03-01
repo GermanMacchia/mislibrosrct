@@ -196,7 +196,7 @@ function LibrosList (props) {
 	                    </th>
 	                    <th>Nombre</th>
 	                    <th>
-	                		<Tooltip title= "Categoria ID">
+	                		<Tooltip title= "Categoria">
 	                    		<ClassIcon />
 	                    	</Tooltip>	                    	
 	                    </th>
