@@ -18,10 +18,11 @@ body {
 #header img {
     width: 350px;
     height: auto;
-    margin: 5px 15px -3px 0px;
+    margin: 5px 15px 8px 0px;
     border-radius: 20px 20px 20px 20px;
     border: solid black 5px;
     float: right;
+    box-shadow: 0px 0px 20px 5px #EF47D5;
 }
 
 #header h1 {
@@ -77,11 +78,14 @@ select {
 }
 
 .buttonsNav {
-    margin-top: 30px;
+    margin: 30px 0px 10px 0px;
     display: flex;
     flex-direction: row;
 }
 
+.butNav{
+    width: 150px;
+}
 #log {
     margin-top: 10px;
     display: flex;
@@ -117,7 +121,7 @@ select {
 
 .homeform textarea {
     width: 160px;
-    height: 130px;
+    height: 147px;
 }
 
 .homeform label {
@@ -157,17 +161,8 @@ select {
     text-align: center;
     border-radius: 50%;
 }
-
-.funcionBtt:hover {
-    cursor: pointer;
-}
-
 #salir {
     color: #F33059;
-}
-
-#salir:hover {
-    color: #2FCA83;
 }
 
 #guardar_button {

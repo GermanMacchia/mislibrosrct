@@ -19,7 +19,9 @@ import AutorenewIcon from '@material-ui/icons/Autorenew';
 
 function PersonaList(props) {
 
-    const alert = useAlert()
+    const alert = useAlert();
+    const url = `//localhost:8000/`;
+    const header = {'Authorization': props.state.AuthReducer[0].token};
 
     const [personasHtml, setPersonasHtml] = useState();
     const [personas, setPersonas] = useState();
@@ -27,44 +29,42 @@ function PersonaList(props) {
     const [editar, setEditar] = useState();
     const [verLibros, setVerLibros] = useState("");
 
-
-
     const handleReset = (e) => {
         e.preventDefault();
 
         async function resetPersona() {
             await axios ({
                 method: 'put',
-                url: `//localhost:8000/p.reset`,
-                headers: { 'Authorization': props.state.AuthReducer[0].token }
+                url: url + `p.reset`,
+                headers: header
             })
             .then((res) => {
-                setReload(reload + 1);
-                alert.success('Se han reseteado los parametros')
+                alert.success('Se han reseteado los parametros');
             })
             .catch((error) => {
-                console.error(error)
+                console.error(error);
             });
         }
 
         resetPersona();
-    } 
+    }
+
 
     const handleDelete = (e) => {
-        e.preventDefault()
+        e.preventDefault();
 
         async function deletePersona() {
-            const opcion = window.confirm('¿Seguro que quieres eliminar?')
+            const opcion = window.confirm('¿Seguro que quieres eliminar?');
+
             if (opcion == true) {
                 await axios({
                         method: 'delete',
-                        url: `//localhost:8000/persona/` + e.target.value,
-                        headers: { 'Authorization': props.state.AuthReducer[0].token },
+                        url: url + `persona/` + e.target.value,
+                        headers: header,
                     })
                     .then((res) => {
                         alert.success('Se ha borrado correctamente')
                         setReload(reload + 1)
-
                     })
                     .catch((error) => {
                         console.error(error)
@@ -72,27 +72,43 @@ function PersonaList(props) {
                     });
             }
         }
+
         deletePersona();
     }
     
 
-    // Editar persona
-
     const handleEditar = (e) => {
-		e.preventDefault()
+		e.preventDefault();
 		
 			async function editarPersona (e) {
 				setEditar(<EditarPersona id={e.target.value} />);
 			}
-		editarPersona(e);
-                
+
+		editarPersona(e);       
 	}
       
-      
-    // Ver Libros Prestados
-  
-    const handleVerLibros = (e) => {
-        e.preventDefault();
+
+
+    const handleLista = (e) => {
+            e.preventDefault();
+
+            async function getLibrosPrestados (id){
+                await axios.get(url + `persona/libro/` + id, {headers: header}
+                )
+                .then((res) => {
+                    const lista = res.data.respuesta;
+                    const listaAux = lista.map((libro, index)=>(
+                            ` ${index + 1} ${JSON.stringify(libro.nombre)}`
+                        ))
+                listaAux.map((libro) => {alert.success(libro)})                  
+                })
+                .catch((error) => {
+                    console.error(error)
+                   alert.show('No tiene libros prestados')
+                });
+            }
+
+            getLibrosPrestados(e.target.value);
 
         const verLibros = e => {
             setVerLibros(<VerLibros id={e.target.value} />);
@@ -107,11 +123,8 @@ function PersonaList(props) {
     useEffect(() => {
 
         async function getPersonas() {
-            await axios.get(`//localhost:8000/persona`, {
-                    headers: {
-                        'Authorization': props.state.AuthReducer[0].token
-                    }
-                })
+            await axios.get(url + `persona`, {headers: header}
+                )
                 .then((res) => {
                     setPersonas(res.data.respuesta)
                 })
@@ -119,15 +132,16 @@ function PersonaList(props) {
                     console.error(error)
                 });
         }
+
         getPersonas();
 
-    }, [props.state.ChangeReducer, reload])
+    }, [props.state.ChangeReducer, reload]);
+
 
     useEffect(() => {
 
         if (personas != undefined) {
 
- 
             const personaAux = personas.map((persona, index) => (
                 <tr key={index}>
 	            	<td id="indexPersona"><p><strong>{index + 1}</strong></p></td> 
@@ -141,13 +155,11 @@ function PersonaList(props) {
                     <td id="editarBtt"><button  className="funcionBtt" onClick={handleEditar} value= {persona.id}>E</button></td>
 	            </tr>
             ))
+
             setPersonasHtml(personaAux);
-
-
         }
-    }, [personas])
 
-
+    }, [personas]);
 
     return (
         <div className='contentList'>

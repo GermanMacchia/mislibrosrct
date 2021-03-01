@@ -11,7 +11,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import ClassIcon from '@material-ui/icons/Class';
 import FormatList from '@material-ui/icons/FormatListNumbered';
 import AutorenewIcon from '@material-ui/icons/Autorenew';
-import MenuBookIcon from '@material-ui/icons/MenuBook';
+import ListAltIcon from '@material-ui/icons/ListAlt';
 
 function CategoriaList (props) {
 
@@ -136,7 +136,9 @@ function CategoriaList (props) {
         <div className='contentList'>
 			<h2>Lista de categorias</h2>
             <Tooltip title= "Reset ID +">
-                <button className="reset" onClick= { handleReset }><AutorenewIcon /></button>
+                <button className="reset" onClick= { handleReset }>
+                    <AutorenewIcon />
+                </button>
             </Tooltip> 
 			<table>
 				<thead>
@@ -154,7 +156,7 @@ function CategoriaList (props) {
                         </th>
                         <th className="funcion">
                         <Tooltip title= "Ver Libros">
-	                    		<MenuBookIcon />
+	                    		<ListAltIcon />
 	                    	</Tooltip>
                         </th>  
                         <th className="funcion">
