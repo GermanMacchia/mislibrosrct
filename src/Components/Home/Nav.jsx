@@ -1,11 +1,13 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+
 import Button from '@material-ui/core/Button';
 import LocalLibraryIcon from '@material-ui/icons/LocalLibrary';
 import CategoryIcon from '@material-ui/icons/Category';
 import PersonPinIcon from '@material-ui/icons/PersonPin';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { green, purple } from '@material-ui/core/colors';
+
 
 export default function Nav () {
 
@@ -64,8 +66,6 @@ export default function Nav () {
 				</div>
 				</ul>
 			</nav> 
-
-			
 		</>
 	);
 

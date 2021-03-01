@@ -6,6 +6,8 @@ import { useAlert } from 'react-alert';
 function EditarCategoria (props) {
 	
 	const alert = useAlert();
+	const url = `//localhost:8000/`;
+	const header = {'Authorization': props.state.AuthReducer[0].token};
 
 	const [newPost, setNewPost] = useState(0);	
 	const [editado, setEditados] = useState("");	
@@ -14,16 +16,10 @@ function EditarCategoria (props) {
 		});
 
 	
-	
-	
     useEffect(() => {
 		
 		async function getCategorias () { 
-			await axios.get(`//localhost:8000/categoria/`+props.id, {
-				  headers: {
-				    'Authorization': props.state.AuthReducer[0].token
-				  }
-				})
+			await axios.get( url + `categoria/`+ props.id, {headers: header})
 				.then((res) => {
 				  setEditados(res.data.respuesta[0])
 				})
@@ -35,8 +31,8 @@ function EditarCategoria (props) {
 			}
 			
 		getCategorias ();
-
 		document.querySelector("#Cregistro").reset();
+
     }, [props.id])
 	
 	
@@ -50,14 +46,16 @@ function EditarCategoria (props) {
 		
 	}
 	
+
 	const handleSubmit = (e) => {
-		e.preventDefault();			
+		e.preventDefault();	
+
 		async function putCategorias () { 
 				await axios({
 				    method: 'put',
-				    url: `//localhost:8000/categoria/`+props.id,
+				    url: url + `categoria/`+ props.id,
 				    data: edit,
-				    headers: {'Authorization': props.state.AuthReducer[0].token}
+				    headers: header
 				    })
 				.then((res) => {
 					alert.success(`Categoria Editada`)
@@ -67,14 +65,16 @@ function EditarCategoria (props) {
 				})
 				.catch((error) => {
 					alert.error("La categoria ya existe, o tiene libros asociados")
-				  console.error(error)
+				 	console.error(error)
 				});
 		}
+
 		putCategorias ();
 		const modal = document.querySelector(".modal");
 		modal.style = "opacity: 0;";
 	}
 	
+
 	useEffect(() => {
 		
 		if(editado != undefined){
@@ -83,9 +83,9 @@ function EditarCategoria (props) {
 			})
 		}
 		
-	
 	}, [editado])
 	
+
 	return(		
 			<div className = "homeform">
 				<a href="#" onClick={cerrarModal}>X</a>
@@ -99,19 +99,18 @@ function EditarCategoria (props) {
 		)
 
 	
-    }
+}
 
-	function cerrarModal(){
-		const modal = document.querySelector(".modal");
-		modal.style = "opacity: 0;";		
-	}
+function cerrarModal(){
+	const modal = document.querySelector(".modal");
+	modal.style = "opacity: 0;";		
+}
 
+const mapStateToProps = (state) =>{
+	return {state}
+}
+const mapActionsToProps = (dispatch) => {
+	return {onSave: (newPost) => dispatch({type:'CHANGE', data: newPost})}
+}
 
-	const mapStateToProps = (state) =>{
-		return {state}
-	}
-	const mapActionsToProps = (dispatch) => {
-		return {onSave: (newPost) => dispatch({type:'CHANGE', data: newPost})}
-	}
-	
-	export default connect(mapStateToProps, mapActionsToProps)(EditarCategoria);
+export default connect(mapStateToProps, mapActionsToProps)(EditarCategoria);

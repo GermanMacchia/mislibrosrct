@@ -3,8 +3,6 @@ import shelve from '../../Assets/shelve.jpg';
 
 export default function Header () {
 
-
-
 	return(
 		
 			<header id= "header">

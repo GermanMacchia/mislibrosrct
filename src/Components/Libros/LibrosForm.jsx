@@ -29,21 +29,21 @@ function LibrosForm (props) {
 		async function getCategorias() {
 	        await axios.get(url + `categoria`, {headers: header})
 	            .then((res) => {
-	                setCategoria(res.data.respuesta)
+	                setCategoria(res.data.respuesta);
 	            })
 	            .catch((error) => {
-	                console.error(error)
+	                console.error(error);
 	            });
 	        };
 	    
 	    async function getPersonas() {
 	        await axios.get(url + `persona`, {headers: header})
 	            .then((res) => {
-	                setPersona(res.data.respuesta)
+	                setPersona(res.data.respuesta);
 	            })
 	            .catch((error) => {
-	                console.error(error)
-	            });
+	                console.error(error);
+	            })
 	        };
 
 

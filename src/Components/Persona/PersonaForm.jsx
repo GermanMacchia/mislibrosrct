@@ -8,6 +8,8 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 function PersonaForm (props) {
 
 	const alert = useAlert()
+	const url = `//localhost:8000/`;
+	const header = {'Authorization': props.state.AuthReducer[0].token};
 
 	const [newPost, setNewPost] = useState(0);
 	const [persona, setPersona] = useState({
@@ -30,9 +32,9 @@ function PersonaForm (props) {
 		async function postPersona () { 
 				await axios({
 				    method: 'post',
-				    url: `//localhost:8000/persona`,
+				    url: url + `persona`,
 				    data: persona,
-				    headers: {'Authorization': props.state.AuthReducer[0].token}
+				    headers: header
 				    })
 				.then((res) => {
 					alert.success('Persona agregada')
@@ -44,6 +46,7 @@ function PersonaForm (props) {
 				  alert.error('Error de datos')
 				});
 			}
+			
 		postPersona ();
 		document.getElementById("Pregistro").reset();
 	}

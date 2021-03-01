@@ -16,6 +16,8 @@ import ListAltIcon from '@material-ui/icons/ListAlt';
 function CategoriaList (props) {
 
     const alert = useAlert()
+    const url = `//localhost:8000/`;
+    const header = {'Authorization': props.state.AuthReducer[0].token};
 
     const [categoriasHtml, setCategoriasHtml] = useState();
     const [categorias, setCategorias] = useState();
@@ -29,8 +31,8 @@ function CategoriaList (props) {
         async function resetCategoria() {
             await axios ({
                 method: 'put',
-                url: `//localhost:8000/c.reset`,
-                headers: { 'Authorization': props.state.AuthReducer[0].token }
+                url: url +`c.reset`,
+                headers: header
             })
             .then((res) => {
                 alert.success('Se han reseteado los parametros');
@@ -44,16 +46,18 @@ function CategoriaList (props) {
         resetCategoria();
     } 
 
+
     const handleDelete = (e) => {
         e.preventDefault()
 
         async function deleteCategoria() {
             const opcion = window.confirm('¿Seguro que quieres eliminar?')
+            
             if (opcion == true) {
                 await axios({
                         method: 'delete',
-                        url: `//localhost:8000/categoria/` + e.target.value,
-                        headers: { 'Authorization': props.state.AuthReducer[0].token }
+                        url: url + `categoria/` + e.target.value,
+                        headers: header
                     })
                     .then((res) => {
                         alert.success('Se ha borrado correctamente')
@@ -66,8 +70,10 @@ function CategoriaList (props) {
                     });
             }
         }
+
         deleteCategoria();
     }
+
 
     const handleEditar = (e) => {
 		e.preventDefault()
@@ -75,10 +81,10 @@ function CategoriaList (props) {
 			async function editarCategoria (e) {
 				setEditar(<EditarCategoria id={e.target.value} />);
 			}
+
 		editarCategoria(e);
         const modal = document.querySelector(".modal");
-		modal.style = "opacity: 1;";
-                
+		modal.style = "opacity: 1;";          
 	}
 
     const handleVerLibros = (e) => {
@@ -87,6 +93,7 @@ function CategoriaList (props) {
         const verLibros = e => {
             setVerLibros(<VerLibros id={e.target.value} />);
         }
+
         verLibros(e);
         const modal = document.querySelector(".modalVerLibros");
 		modal.style = "opacity: 1;";
@@ -96,11 +103,7 @@ function CategoriaList (props) {
     useEffect(() => {
 
         async function getCategorias() {
-            await axios.get(`//localhost:8000/categoria`, {
-                    headers: {
-                        'Authorization': props.state.AuthReducer[0].token
-                    }
-                })
+            await axios.get(url + `categoria`, {headers: header})
                 .then((res) => {
                     setCategorias(res.data.respuesta)
                 })
@@ -108,9 +111,12 @@ function CategoriaList (props) {
                     console.error(error)
                 });
         }
+
         getCategorias();
 
     }, [props.state.ChangeReducer, reload])
+
+
 
     useEffect(() => {
 
@@ -126,10 +132,11 @@ function CategoriaList (props) {
                     <td id="editadoBtt"><button className="funcionBtt"  onClick={handleEditar} value= {categoria.id}>E</button></td>
 	            </tr>
             ))
+
             setCategoriasHtml(categoriaAux);
         }
-    }, [categorias])
 
+    }, [categorias])
 
 
     return (

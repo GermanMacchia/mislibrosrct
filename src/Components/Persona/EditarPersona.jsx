@@ -6,6 +6,8 @@ import { useAlert } from 'react-alert';
 function EditarPersona (props) {
 	
 	const alert = useAlert();
+	const url = `//localhost:8000/`;
+	const header = {'Authorization': props.state.AuthReducer[0].token};
 
 	const [newPost, setNewPost] = useState(0);	
 	const [editado, setEditados] = useState("");	
@@ -22,26 +24,18 @@ function EditarPersona (props) {
     useEffect(() => {
 		
 		async function getPersonas () { 
-			await axios.get(`//localhost:8000/persona/`+props.id, {
-				  headers: {
-				    'Authorization': props.state.AuthReducer[0].token
-				  }
-				})
+			await axios.get(url + `persona/`+props.id, {headers: header})
 				.then((res) => {
 				  setEditados(res.data.respuesta[0])
-				  
 				})
 				.catch((error) => {
 				  console.error(error)
 				});
-
-				
 			}
 			
 		getPersonas ();
 
 		document.querySelector("#registro").reset();
-		
 		const modal = document.querySelector(".modal");
 		modal.classList.remove("opacidad0");
 		modal.classList.add("opacidad");
@@ -64,9 +58,9 @@ function EditarPersona (props) {
 		async function putPersonas () { 
 				await axios({
 				    method: 'put',
-				    url: `//localhost:8000/persona/`+props.id,
+				    url: url + `persona/`+props.id,
 				    data: edit,
-				    headers: {'Authorization': props.state.AuthReducer[0].token}
+				    headers: header
 				    })
 				.then((res) => {
 					alert.success(`Persona Editada`)
@@ -78,6 +72,7 @@ function EditarPersona (props) {
 				  console.error(error)
 				});
 		}
+
 		putPersonas ();
 		const modal = document.querySelector(".modal");
 		modal.classList.remove("opacidad");
@@ -117,21 +112,20 @@ function EditarPersona (props) {
 		)
 
 	
-    }
+}
 
-	function cerrarModal(){
-		const modal = document.querySelector(".modal");
-		modal.classList.remove("opacidad");
-		modal.classList.add("opacidad0");
-		
-	}
-
-
-	const mapStateToProps = (state) =>{
-		return {state}
-	}
-	const mapActionsToProps = (dispatch) => {
-		return {onSave: (newPost) => dispatch({type:'CHANGE', data: newPost})}
-	}
+function cerrarModal(){
+	const modal = document.querySelector(".modal");
+	modal.classList.remove("opacidad");
+	modal.classList.add("opacidad0");
 	
-	export default connect(mapStateToProps, mapActionsToProps)(EditarPersona);
+}
+
+const mapStateToProps = (state) =>{
+	return {state}
+}
+const mapActionsToProps = (dispatch) => {
+	return {onSave: (newPost) => dispatch({type:'CHANGE', data: newPost})}
+}
+
+export default connect(mapStateToProps, mapActionsToProps)(EditarPersona);
