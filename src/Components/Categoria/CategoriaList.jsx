@@ -89,15 +89,25 @@ function CategoriaList (props) {
 
     const handleVerLibros = (e) => {
         e.preventDefault();
+        const id = e.target.value;
 
-        const verLibros = e => {
-            setVerLibros(<VerLibros id={e.target.value} />);
+        async function getLibrosCat () { 
+            await axios.get( url + `libro/Categoria/` + id, {headers: header})
+            .then((res) => {
+                const libros = res.data.respuesta;
+                const listaAux = libros.map((libro, index)=>(
+                        ` ${index + 1} ${JSON.stringify(libro.nombre)}`
+                    ))
+                listaAux.map((libro) => {alert.success(libro)})                  
+            })
+            .catch((error) => {
+                console.error(error)
+               alert.show('Esta categoria no tiene libros asociados')
+            });
         }
 
-        verLibros(e);
-        const modal = document.querySelector(".modalVerLibros");
-		modal.style = "opacity: 1;";
-    }
+        getLibrosCat();
+}
 
 
     useEffect(() => {
@@ -184,10 +194,6 @@ function CategoriaList (props) {
 	        </table>
             <div className="modal">
 				{editar}
-                {verLibros}
-			</div>
-            <div className="modalVerLibros">			
-                {verLibros}
 			</div>
 		</div>
     );
