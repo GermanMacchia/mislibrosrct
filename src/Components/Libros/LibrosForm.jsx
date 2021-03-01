@@ -10,7 +10,7 @@ function LibrosForm (props) {
 
 	const alert = useAlert();
 	const url = `//localhost:8000/`;
-	const header = {headers: {'Authorization': props.state.AuthReducer[0].token}};
+	const header = {'Authorization': props.state.AuthReducer[0].token};
 
 	const [newPost, setNewPost] = useState(0);
 	const [libro, setLibro] = useState({
@@ -22,6 +22,41 @@ function LibrosForm (props) {
 	
 	const [categoria, setCategoria] = useState([]);
 	const [persona, setPersona] = useState([])
+
+
+useEffect(() => {
+	async function getCategorias() {
+        await axios.get(`//localhost:8000/categoria`, {
+                headers: {
+                    'Authorization': props.state.AuthReducer[0].token
+                }
+            })
+            .then((res) => {
+                setCategoria(res.data.respuesta)
+            })
+            .catch((error) => {
+                console.error(error)
+            });
+        }
+    getCategorias();
+
+    async function getPersonas() {
+        await axios.get(`//localhost:8000/persona`, {
+                headers: {
+                    'Authorization': props.state.AuthReducer[0].token
+                }
+            })
+            .then((res) => {
+                setPersona(res.data.respuesta)
+            })
+            .catch((error) => {
+                console.error(error)
+            });
+        }
+    getPersonas();
+
+
+}, [])
 
 
 	const handleNuevoLibro = (e) => {
@@ -74,7 +109,7 @@ useEffect(() => {
 					    method: 'post',
 					    url: url + 'libro',
 					    data: libro,
-					    headers: header.headers
+					    headers: header
 					})
 					.then((res) => {
 						alert.success(`Libro agregado`)
