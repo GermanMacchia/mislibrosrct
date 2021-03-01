@@ -20,7 +20,7 @@ export default function Nav () {
 							<Button
 								className="butNav"
 						        variant="contained"
-						        color="green"
+						        color="primary"
 						        startIcon={<LocalLibraryIcon />}>
 						        Biblioteca
 						    </Button>
@@ -31,7 +31,7 @@ export default function Nav () {
 							<Button
 								className="butNav"
 						        variant="contained"
-						        color="default"
+						        color="primary"
 						        startIcon={<CategoryIcon />}>
 						        Categoria
 						    </Button>
@@ -44,7 +44,7 @@ export default function Nav () {
 							<Button
 								className="butNav"
 						        variant="contained"
-						        color="default"
+						        color="primary"
 						        startIcon={<PersonPinIcon />}>
 						        Personas
 						    </Button>

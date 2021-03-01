@@ -3,6 +3,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { useAlert } from 'react-alert';
 import EditarCategoria from './EditarCategoria';
+import VerLibros from './VerLibros';
 
 import Tooltip from '@material-ui/core/Tooltip';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -10,6 +11,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import ClassIcon from '@material-ui/icons/Class';
 import FormatList from '@material-ui/icons/FormatListNumbered';
 import AutorenewIcon from '@material-ui/icons/Autorenew';
+import ListAltIcon from '@material-ui/icons/ListAlt';
 
 function CategoriaList (props) {
 
@@ -19,6 +21,7 @@ function CategoriaList (props) {
     const [categorias, setCategorias] = useState();
     const [reload, setReload] = useState(0);
     const [editar, setEditar] = useState("");
+    const [verLibros, setVerLibros] = useState("");
 
     const handleReset = (e) => {
         e.preventDefault();
@@ -73,8 +76,21 @@ function CategoriaList (props) {
 				setEditar(<EditarCategoria id={e.target.value} />);
 			}
 		editarCategoria(e);
+        const modal = document.querySelector(".modal");
+		modal.style = "opacity: 1;";
                 
 	}
+
+    const handleVerLibros = (e) => {
+        e.preventDefault();
+
+        const verLibros = e => {
+            setVerLibros(<VerLibros id={e.target.value} />);
+        }
+        verLibros(e);
+        const modal = document.querySelector(".modalVerLibros");
+		modal.style = "opacity: 1;";
+    }
 
 
     useEffect(() => {
@@ -105,6 +121,7 @@ function CategoriaList (props) {
 	            	<td id="indexcategoria"><p><strong>{index + 1}</strong></p></td> 
 	                <td id="nombrecategoria"><p>{categoria.nombre}</p></td>
 	            	<td id="aliascategoria"><p>{categoria.id}</p></td>
+                    <td id="mostrarLibrosBtt"><button className="funcionBtt" onClick={handleVerLibros} value= {categoria.id}>V</button></td>
 	            	<td id="deleteBtt"><button className="funcionBtt" onClick={handleDelete} value= {categoria.id}>X</button></td>
                     <td id="editadoBtt"><button className="funcionBtt"  onClick={handleEditar} value= {categoria.id}>E</button></td>
 	            </tr>
@@ -119,7 +136,9 @@ function CategoriaList (props) {
         <div className='contentList'>
 			<h2>Lista de categorias</h2>
             <Tooltip title= "Reset ID +">
-                <button className="reset" onClick= { handleReset }><AutorenewIcon /></button>
+                <button className="reset" onClick= { handleReset }>
+                    <AutorenewIcon />
+                </button>
             </Tooltip> 
 			<table>
 				<thead>
@@ -136,6 +155,11 @@ function CategoriaList (props) {
                             </Tooltip>                          
                         </th>
                         <th className="funcion">
+                        <Tooltip title= "Ver Libros">
+	                    		<ListAltIcon />
+	                    	</Tooltip>
+                        </th>  
+                        <th className="funcion">
                             <Tooltip title= "Borrar">
                                 <DeleteIcon />
                             </Tooltip>
@@ -151,7 +175,13 @@ function CategoriaList (props) {
 	                {categoriasHtml}
 	            </tbody>
 	        </table>
-            {editar}
+            <div className="modal">
+				{editar}
+                {verLibros}
+			</div>
+            <div className="modalVerLibros">			
+                {verLibros}
+			</div>
 		</div>
     );
 }

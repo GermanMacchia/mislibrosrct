@@ -54,6 +54,9 @@ function LibrosList (props) {
 				setEditar(<EditarLibro id={e.target.value} />);
 			}
 		editarLibro(e);
+		
+		const modal = document.querySelector(".modal");
+		modal.style = "opacity: 1;";
 	}
 
 	const handlePrestar = (e) =>{
@@ -229,7 +232,10 @@ function LibrosList (props) {
 	                {librosHtml}
 	            </tbody>
 	        </table>
-			{editar}
+			<div className="modal">
+				{editar}
+			</div>
+			
 		</div>
 	);
 }

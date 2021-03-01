@@ -37,11 +37,6 @@ function EditarCategoria (props) {
 		getCategorias ();
 
 		document.querySelector("#Cregistro").reset();
-		
-		const modal = document.querySelector(".modal");
-		modal.classList.remove("opacidad0");
-		modal.classList.add("opacidad");
-
     }, [props.id])
 	
 	
@@ -77,8 +72,7 @@ function EditarCategoria (props) {
 		}
 		putCategorias ();
 		const modal = document.querySelector(".modal");
-		modal.classList.remove("opacidad");
-		modal.classList.add("opacidad0");
+		modal.style = "opacity: 0;";
 	}
 	
 	useEffect(() => {
@@ -93,7 +87,7 @@ function EditarCategoria (props) {
 	}, [editado])
 	
 	return(		
-			<div className = "homeform modal">
+			<div className = "homeform">
 				<a href="#" onClick={cerrarModal}>X</a>
 				<h2>Ingresar una categoria</h2>
 					<form id="Cregistro">
@@ -109,9 +103,7 @@ function EditarCategoria (props) {
 
 	function cerrarModal(){
 		const modal = document.querySelector(".modal");
-		modal.classList.remove("opacidad");
-		modal.classList.add("opacidad0");
-		
+		modal.style = "opacity: 0;";		
 	}
 
 
