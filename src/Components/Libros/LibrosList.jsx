@@ -23,7 +23,6 @@ function LibrosList (props) {
 	const [libros, setLibros] = useState();
 	const [editar, setEditar] = useState();
 	const [libro, setLibro] = useState();
-	const [librosCategorias, setlibrosCategorias] = useState();
 	const [reload, setReload] = useState(0)
 
 
@@ -157,7 +156,7 @@ function LibrosList (props) {
 	            <tr key={index}>
 	            	<td id="indexlibro"><p><strong>{index + 1}</strong></p></td> 
 	                <td id="nombrelibro"><p>{libro.nombre}</p></td>
-					<td id="categorialibro"><p>{librosCategorias[librosCategorias.findIndex(x => x.id == libro.categoria_id)].nombre}</p></td>
+	                <td id="categorialibro"><p>{libro.categoria_id}</p></td>    
 	                <td id="descripcionlibro"><p>{libro.descripcion}</p></td>
 	            	<td id="personalibro"><p>{libro.persona_id}</p></td>
 	            	<td id= "prestarbtt"><button className="funcionBtt" onClick={handlePrestar} value= {libro.id}>P</button></td>
@@ -186,7 +185,7 @@ function LibrosList (props) {
 	                    </th>
 	                    <th>Nombre</th>
 	                    <th>
-	                		<Tooltip title= "Categoria">
+	                		<Tooltip title= "Categoria ID">
 	                    		<ClassIcon />
 	                    	</Tooltip>	                    	
 	                    </th>
@@ -235,3 +234,4 @@ const mapStateToProps = (state) =>{
 }
 
 export default connect(mapStateToProps, null)(LibrosList);
+
