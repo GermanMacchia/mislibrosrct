@@ -6,9 +6,7 @@ import LibrosForm from './LibrosForm'
 import LibrosList from './LibrosList'
 
 
-
 function Biblioteca (props) {
-
 
 	return(
 		<div className='display'>

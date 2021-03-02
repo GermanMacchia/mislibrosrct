@@ -29,21 +29,21 @@ function LibrosForm (props) {
 		async function getCategorias() {
 	        await axios.get(url + `categoria`, {headers: header})
 	            .then((res) => {
-	                setCategoria(res.data.respuesta)
+	                setCategoria(res.data.respuesta);
 	            })
 	            .catch((error) => {
-	                console.error(error)
+	                console.error(error);
 	            });
 	        };
 	    
 	    async function getPersonas() {
 	        await axios.get(url + `persona`, {headers: header})
 	            .then((res) => {
-	                setPersona(res.data.respuesta)
+	                setPersona(res.data.respuesta);
 	            })
 	            .catch((error) => {
-	                console.error(error)
-	            });
+	                console.error(error);
+	            })
 	        };
 
 
@@ -89,12 +89,12 @@ function LibrosForm (props) {
 			document.getElementById("Tregistro").reset();
 	};
 	
-	const opcion = categoria.map(categorias =>{
-		return <option value = {categorias.id} >{categorias.nombre}</option>		
+	const opcion = categoria.map((categorias, index) =>{
+		return <option key= {index} value = {categorias.id} >{categorias.nombre}</option>		
 	});
 
-	const opcionPersona = persona.map(personas =>{
-		return <option value = {personas.id} >{personas.nombre}</option>		
+	const opcionPersona = persona.map((personas, index) =>{
+		return <option key= {index} value = {personas.id} >{personas.nombre}</option>		
 	});
 
 	return  (

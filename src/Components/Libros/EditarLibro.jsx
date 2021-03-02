@@ -6,6 +6,8 @@ import { useAlert } from 'react-alert';
 function EditarLibro (props) {
 	
 	const alert = useAlert();
+	const url = `//localhost:8000/`;
+	const header = {'Authorization': props.state.AuthReducer[0].token};
 
 	const [newPost, setNewPost] = useState(0);
 	const [editado, setEditados] = useState({});	
@@ -20,25 +22,18 @@ function EditarLibro (props) {
     useEffect(() => {
 		
 		async function getLibros () { 
-			await axios.get(`//localhost:8000/libro/`+ props.id, {
-				  headers: {
-				    'Authorization': props.state.AuthReducer[0].token
-				  }
-				})
+			await axios.get(url + `libro/`+ props.id, {headers: header})
 				.then((res) => {
-				  setEditados(res.data.respuesta[0])
-				  
+				  setEditados(res.data.respuesta[0]);
 				})
 				.catch((error) => {
-				  console.error(error)
+				  console.error(error);
 				});
 			}
 			
 		getLibros ();
 
-
     }, [props.id])
-	
 	
 
 	const handleEditarLibro = (e) => {
@@ -48,14 +43,16 @@ function EditarLibro (props) {
 		});
 	}
 	
+
 	const handleSubmit = (e) => {
-		e.preventDefault();			
+		e.preventDefault();	
+
 		async function putLibros () { 
 				await axios({
 				    method: 'put',
-				    url: `//localhost:8000/libro/`+ props.id,
+				    url: url + `libro/`+ props.id,
 				    data: edit,
-				    headers: {'Authorization': props.state.AuthReducer[0].token}
+				    headers: header
 				    })
 				.then((res) => {
 					alert.success(`Libro editado`)
@@ -69,9 +66,11 @@ function EditarLibro (props) {
 				  console.error(error)
 				});
 		}
+
 		putLibros ();
 	}
 	
+
 	useEffect(() => {
 		
 		if(editado != undefined){
@@ -85,7 +84,8 @@ function EditarLibro (props) {
 		
 	}, [editado])
 	
-	return(		
+
+	return (		
 			<div className = "homeform">
 				<a href="#" onClick={cerrarModal}>X</a>
 				<h2>Editar libro</h2>
@@ -107,22 +107,19 @@ function EditarLibro (props) {
 					</form>
 				</div>
 			</div>	
-		)
+		);
+}
 
-	
-    }
+function cerrarModal(){
+	const modal = document.querySelector(".modal");
+	modal.style = "opacity: 0;";
+}
 
-	function cerrarModal(){
-		const modal = document.querySelector(".modal");
-		modal.style = "opacity: 0;";
-	}
+const mapStateToProps = (state) =>{
+	return {state}
+}
+const mapActionsToProps = (dispatch) => {
+	return {onSave: (newPost) => dispatch({type:'CHANGE', data: newPost})}
+}
 
-
-	const mapStateToProps = (state) =>{
-		return {state}
-	}
-	const mapActionsToProps = (dispatch) => {
-		return {onSave: (newPost) => dispatch({type:'CHANGE', data: newPost})}
-	}
-	
-	export default connect(mapStateToProps, mapActionsToProps)(EditarLibro);
+export default connect(mapStateToProps, mapActionsToProps)(EditarLibro);

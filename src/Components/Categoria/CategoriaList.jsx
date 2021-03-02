@@ -16,6 +16,8 @@ import ListAltIcon from '@material-ui/icons/ListAlt';
 function CategoriaList (props) {
 
     const alert = useAlert()
+    const url = `//localhost:8000/`;
+    const header = {'Authorization': props.state.AuthReducer[0].token};
 
     const [categoriasHtml, setCategoriasHtml] = useState();
     const [categorias, setCategorias] = useState();
@@ -29,8 +31,8 @@ function CategoriaList (props) {
         async function resetCategoria() {
             await axios ({
                 method: 'put',
-                url: `//localhost:8000/c.reset`,
-                headers: { 'Authorization': props.state.AuthReducer[0].token }
+                url: url +`c.reset`,
+                headers: header
             })
             .then((res) => {
                 alert.success('Se han reseteado los parametros');
@@ -44,16 +46,18 @@ function CategoriaList (props) {
         resetCategoria();
     } 
 
+
     const handleDelete = (e) => {
         e.preventDefault()
 
         async function deleteCategoria() {
             const opcion = window.confirm('¿Seguro que quieres eliminar?')
+            
             if (opcion == true) {
                 await axios({
                         method: 'delete',
-                        url: `//localhost:8000/categoria/` + e.target.value,
-                        headers: { 'Authorization': props.state.AuthReducer[0].token }
+                        url: url + `categoria/` + e.target.value,
+                        headers: header
                     })
                     .then((res) => {
                         alert.success('Se ha borrado correctamente')
@@ -66,8 +70,10 @@ function CategoriaList (props) {
                     });
             }
         }
+
         deleteCategoria();
     }
+
 
     const handleEditar = (e) => {
 		e.preventDefault()
@@ -75,32 +81,38 @@ function CategoriaList (props) {
 			async function editarCategoria (e) {
 				setEditar(<EditarCategoria id={e.target.value} />);
 			}
+
 		editarCategoria(e);
         const modal = document.querySelector(".modal");
-		modal.style = "opacity: 1;";
-                
+		modal.style = "opacity: 1;";          
 	}
 
     const handleVerLibros = (e) => {
         e.preventDefault();
+        const id = e.target.value;
 
-        const verLibros = e => {
-            setVerLibros(<VerLibros id={e.target.value} />);
+        async function getLibrosCat () { 
+            await axios.get( url + `libro/Categoria/` + id, {headers: header})
+            .then((res) => {
+                const libros = res.data.respuesta;
+                const listaAux = libros.map((libro, index)=>(
+                        ` ${index + 1} ${JSON.stringify(libro.nombre)}`
+                    ))
+                listaAux.map((libro) => {alert.success(libro)})                  
+            })
+            .catch((error) => {
+               alert.show('Esta categoria no tiene libros asociados')
+            });
         }
-        verLibros(e);
-        const modal = document.querySelector(".modalVerLibros");
-		modal.style = "opacity: 1;";
-    }
+
+        getLibrosCat();
+}
 
 
     useEffect(() => {
 
         async function getCategorias() {
-            await axios.get(`//localhost:8000/categoria`, {
-                    headers: {
-                        'Authorization': props.state.AuthReducer[0].token
-                    }
-                })
+            await axios.get(url + `categoria`, {headers: header})
                 .then((res) => {
                     setCategorias(res.data.respuesta)
                 })
@@ -108,9 +120,12 @@ function CategoriaList (props) {
                     console.error(error)
                 });
         }
+
         getCategorias();
 
     }, [props.state.ChangeReducer, reload])
+
+
 
     useEffect(() => {
 
@@ -126,10 +141,11 @@ function CategoriaList (props) {
                     <td id="editadoBtt"><button className="funcionBtt"  onClick={handleEditar} value= {categoria.id}>E</button></td>
 	            </tr>
             ))
+
             setCategoriasHtml(categoriaAux);
         }
-    }, [categorias])
 
+    }, [categorias])
 
 
     return (
@@ -176,6 +192,7 @@ function CategoriaList (props) {
 	            </tbody>
 	        </table>
             <div className="modal">
+
 				{editar}               
 			</div>
             <div className="modalVerLibros">			

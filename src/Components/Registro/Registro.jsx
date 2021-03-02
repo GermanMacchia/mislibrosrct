@@ -7,6 +7,7 @@ import AssignmentIcon from '@material-ui/icons/Assignment';
 export default function Registro () {
 	
 	const alert = useAlert()
+	const url = `//localhost:8000/`;
 
 	const [user, setUser] = useState({
 		usuario: " ",
@@ -27,7 +28,7 @@ export default function Registro () {
 		e.preventDefault();
 
 		async function registro () {
-			await axios.post(`//localhost:8000/registro`, user)
+			await axios.post(url + `registro`, user)
 			    .then((res) => {
                     alert.success('Se ha Registrado correctamente')
                 })
@@ -36,6 +37,7 @@ export default function Registro () {
                     alert.error('Nombre de usuario ya registrado')
                 });
         }
+        
         registro();
         document.getElementById("registro").reset()
 	}

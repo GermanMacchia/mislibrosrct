@@ -11,7 +11,8 @@ function LoginForm (props) {
 
 	const history = useHistory();
 	const alert = useAlert()
-	
+	const url = `//localhost:8000/`;
+
 	const [form, setForm] = useState({
 								user:'',
 								pass:''
@@ -28,20 +29,18 @@ function LoginForm (props) {
     	e.preventDefault();
 
     	async function postLogin () { 
-			await axios.post(`//localhost:8000/login`, form)
+			await axios.post(url + `login`, form)
 				.then( (res) => {
-
 					if(res.data.token != null || undefined){
 						const token = res.data.token;
-						props.onSave({token: token,
-									auth: true});
+						props.onSave({
+							token: token,
+							auth: true
+						});
 						alert.success(`¡Bienvenido ${form.user}!`);
 						history.push('/home');
-					
-					}else{
-						console.log('Error de Login')
 					}
-				} )
+				})
 				.catch( (error) => {
 				    alert.error('Error de Datos');
 				});

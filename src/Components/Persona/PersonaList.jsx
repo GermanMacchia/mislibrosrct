@@ -22,6 +22,7 @@ function PersonaList(props) {
     const alert = useAlert();
     const url = `//localhost:8000/`;
     const header = {'Authorization': props.state.AuthReducer[0].token};
+    const inputForm = props.state.ChangeReducer;
 
     const [personasHtml, setPersonasHtml] = useState();
     const [personas, setPersonas] = useState();
@@ -93,18 +94,24 @@ function PersonaList(props) {
             e.preventDefault();
 
             async function getLibrosPrestados (id){
-                await axios.get(url + `persona/libro/` + id, {headers: header}
+                await axios.get(url + `libro`, {headers: header}
                 )
                 .then((res) => {
                     const lista = res.data.respuesta;
-                    const listaAux = lista.map((libro, index)=>(
+                    const getLibroPersona = (id) => lista.filter( (libro) => libro.persona_id == id);
+                    const libroP = getLibroPersona(id);
+
+                    if(libroP.length < 1){
+                        alert.show('No tiene libros prestados')
+                    }else{
+                        const listaAux = libroP.map((libro, index)=>(
                             ` ${index + 1} ${JSON.stringify(libro.nombre)}`
                         ))
-                listaAux.map((libro) => {alert.success(libro)})                  
-                })
+                        listaAux.map((libro) => {alert.success(libro)})                  
+                    }}
+                )
                 .catch((error) => {
-                    console.error(error)
-                   alert.show('No tiene libros prestados')
+                   console.log(error)
                 });
             }
 
@@ -135,7 +142,7 @@ function PersonaList(props) {
 
         getPersonas();
 
-    }, [props.state.ChangeReducer, reload]);
+    }, [inputForm, reload]);
 
 
     useEffect(() => {

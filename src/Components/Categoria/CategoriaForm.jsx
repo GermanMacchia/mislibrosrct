@@ -8,6 +8,8 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 function CategoriaForm (props) {
 
 	const alert = useAlert();
+	const url = `//localhost:8000/`;
+	const header = {'Authorization': props.state.AuthReducer[0].token};
 
 	const [newPost, setNewPost] = useState(0);
 	const [categoria, setCategoria] = useState({
@@ -26,9 +28,9 @@ function CategoriaForm (props) {
 		async function postCategoria () { 
 				await axios({
 				    method: 'post',
-				    url: `//localhost:8000/categoria`,
+				    url: url + `categoria`,
 				    data: categoria,
-				    headers: {'Authorization': props.state.AuthReducer[0].token}
+				    headers: header
 				    })
 				.then((res) => {
 					alert.success('Nueva categoria agregada')
@@ -40,6 +42,7 @@ function CategoriaForm (props) {
 				  alert.error('Categoria existente')
 				});
 			}
+			
 		postCategoria ();
 		document.getElementById("Cregistro").reset();
 	}

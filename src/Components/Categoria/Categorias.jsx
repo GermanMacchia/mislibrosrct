@@ -12,7 +12,6 @@ function Categorias (props) {
 	const [libros, setLibros] = useState({});
 
 
-
 	return(
 		<>
 			<Nav />
