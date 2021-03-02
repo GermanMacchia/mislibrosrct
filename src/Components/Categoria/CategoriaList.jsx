@@ -91,21 +91,29 @@ function CategoriaList (props) {
         e.preventDefault();
         const id = e.target.value;
 
-        async function getLibrosCat () { 
-            await axios.get( url + `libro/Categoria/` + id, {headers: header})
-            .then((res) => {
-                const libros = res.data.respuesta;
-                const listaAux = libros.map((libro, index)=>(
-                        ` ${index + 1} ${JSON.stringify(libro.nombre)}`
-                    ))
-                listaAux.map((libro) => {alert.success(libro)})                  
-            })
-            .catch((error) => {
-               alert.show('Esta categoria no tiene libros asociados')
-            });
-        }
+        async function getLibrosCat (id){
+                await axios.get(url + `libro`, {headers: header}
+                )
+                .then((res) => {
+                    const lista = res.data.respuesta;
+                    const getLibroCategoria = (id) => lista.filter( (libro) => libro.categoria_id == id);
+                    const libroC = getLibroCategoria(id);
 
-        getLibrosCat();
+                    if(libroC.length < 1){
+                        alert.show('La categoria no tiene libros asociados')
+                    }else{
+                        const listaAux = libroC.map((libro, index)=>(
+                            ` ${index + 1} ${JSON.stringify(libro.nombre)}`
+                        ))
+                        listaAux.map((libro) => {alert.success(libro)})                  
+                    }}
+                )
+                .catch((error) => {
+                   console.log(error)
+                });
+            }
+
+        getLibrosCat(e.target.value);
 }
 
 
