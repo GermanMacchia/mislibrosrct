@@ -161,6 +161,11 @@ select {
     text-align: center;
     border-radius: 50%;
 }
+
+.funcionBtt:hover {
+    cursor: pointer;
+}
+
 #salir {
     color: #F33059;
 }

@@ -50,7 +50,7 @@ export default function Registro () {
 					<label>User </label>
 					<input type="text" name="usuario"  onChange= {handleChange} placeholder="Nombre de usuario" /><br/>
 					<label>Pass </label>
-					<input type="text" name="clave" onChange= {handleChange} placeholder="Ingrese una contraseña" /><br/>
+					<input type="password" name="clave" onChange= {handleChange} placeholder="Ingrese una contraseña" /><br/>
 					<label>Mail </label>
 					<input type="email" name="email" onChange= {handleChange} placeholder="Ingrese un email" /><br/>
 					<label>Celu </label>
