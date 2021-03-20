@@ -216,23 +216,7 @@ td {
     font-size: 15px;
 }
 
-#editadoBtt {
-    text-align: center;
-}
-
-#deleteBtt {
-    text-align: center;
-}
-
-#mostrarLibrosBtt {
-    text-align: center;
-}
-
-#editarBtt {
-    text-align: center;
-}
-
-#librosPrestados {
+#editadoBtt, #deleteBtt, #mostrarLibrosBtt, #editarBtt, #librosPrestados {
     text-align: center;
 }
 
@@ -269,16 +253,8 @@ table p {
     .contentList {
         height: 470px;
     }
-    #Lregistro {
-        padding-right: 30px;
-    }
-    #Tregistro {
-        padding-right: 30px;
-    }
-    #Pregistro {
-        text-align: center;
-    }
-    #Cregistro {
+
+    #Lregistro, #Tregistro, #Cregistroi, #Pregistro {
         text-align: center;
     }
 }
@@ -288,27 +264,27 @@ table p {
         height: 470px;
         width: auto;
     }
+    .homeform {
+        text-align: left;
+    }
     .display {
         display: block;
     }
     .contentForm {
         width: 97.5%;
         text-align: center;
+        height: 560px;
     }
     nav ul a {
         font-size: 13px;
     }
-    #Lregistro {
+    #Lregistro, #Tregistro, #Cregistro, #Pregistro {
         text-align: center;
     }
-    #Tregistro {
-        text-align: center;
-    }
-    #Cregistro {
-        text-align: center;
-    }
-    #Pregistro {
-        text-align: center;
+
+    #Lregistro, #Tregistro {
+        margin-right: 50px;
+
     }
 }
 
