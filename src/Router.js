@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
-import Header from './components/Home/Header';
-import SignIn from './components/Login/SignIn';
-import Home from './components/Home/Home';
-import Categorias from './components/Categoria/Categorias';
-import Personas from './components/Persona/Personas';
+import Header from './Components/Home/Header';
+import SignIn from './Components/Login/SignIn';
+import Home from './Components/Home/Home';
+import Categorias from './Components/Categoria/Categorias';
+import Personas from './Components/Persona/Personas';
 
 
 export default function Router (props){

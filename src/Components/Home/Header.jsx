@@ -1,5 +1,5 @@
 import React from 'react';
-import shelve from '../../assets/shelve.jpg';
+import shelve from '../../Assets/shelve.jpg';
 
 export default function Header () {
 
